@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 포트폴리오 사이트 요구사항 정의서
 
-## Getting Started
+## 1. 사이트의 주요 목적
+- 프론트엔드/풀스택 개발자 포트폴리오 사이트
+- 프로젝트 및 기술 스택 소개
 
-First, run the development server:
+## 2. 핵심 페이지
+- **Home:** 메인 소개 페이지
+- **About:** 개인 소개글
+- **Resume:** 경력 소개, 기술 스택, 자격증
+- **Projects:** 프로젝트 목록 및 설명, 프로젝트 필터링 기능 포함
+- **Blog:** Velog API를 통해 블로그 게시글 목록 나열
+- **Contact:** 연락처 및 이메일 전송 폼
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 3. 주요 기능
+- 다크 모드 지원
+- 프로젝트 필터링 기능
+- 블로그 게시글 목록 나열 (Velog API 연동)
+- 소셜 링크 연동
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 4. 디자인 및 레이아웃
+- 모던 디자인
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 5. 사용할 기술 스택
+- **프레임워크:** NextJS 15
+- **언어:** TypeScript
+- **상태 관리:** Recoil
+- **데이터 관리:** React Query
+- **스타일링:** TailwindCSS
+- **컴포넌트 라이브러리:** shadcn/ui
+- **데이터베이스:** MongoDB
+- **ORM:** Prisma
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 6. 배포 환경
+- Vercel
 
-## Learn More
+## 7. 기타 고려사항
+- SEO 최적화
+- 반응형 디자인
+- 웹 접근성 (A11Y) 고려
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
