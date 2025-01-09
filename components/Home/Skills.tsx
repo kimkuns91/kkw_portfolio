@@ -1,11 +1,11 @@
 'use client';
 
 import { SKILL_CATEGORY_LIST, SKILL_LIST } from '@/constants/skills';
+import { slideInFromBottom, slideInFromLeft } from '@/utils/motions';
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { slideInFromLeft } from '@/utils/motions';
 import { useState } from 'react';
 
 const Skills: React.FC = () => {
@@ -18,13 +18,20 @@ const Skills: React.FC = () => {
       className={cn('container py-10 md:py-20')}
     >
       <motion.h2
-        variants={slideInFromLeft(1.2)}
+        initial="hidden"
+        animate="visible"
+        variants={slideInFromLeft(1.5)}
         className="text-2xl md:text-5xl font-bold text-accent mb-10"
       >
         Skills
       </motion.h2>
 
-      <div className="flex flex-col md:flex-row gap-10">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={slideInFromBottom(1.5)}
+        className="flex flex-col md:flex-row gap-10"
+      >
         {/* 왼쪽 카테고리 메뉴 */}
         <div className="w-full md:w-48">
           <div className="flex justify-between md:flex-col border-b-2 md:border-b-0 md:border-l-2 border-accent/30">
@@ -72,7 +79,7 @@ const Skills: React.FC = () => {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

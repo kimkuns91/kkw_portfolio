@@ -13,8 +13,8 @@ const Pin = ({ className }: { className?: string }) => {
       )}
     >
       <div className="h-full w-full">
-        <div className="absolute inset-x-0 top-0 z-20 mx-auto inline-block w-fit rounded-lg px-2 py-1 text-xs font-normal bg-accent text-primary">
-          I{"'"}m here
+        <div className="absolute inset-x-0 top-0 z-20 mx-auto inline-block w-fit rounded-xl px-3 py-1 text-xs font-normal bg-accent text-primary">
+          저는 여기에 있어요!
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-accent/0 via-accent/90 to-accent/0 transition-opacity duration-500"></span>
         </div>
 

@@ -9,7 +9,7 @@ interface BlogPostProps {
 export default function BlogPost({ post }: BlogPostProps) {
   return (
     <Link href={`https://velog.io/@kimkuns/${post.url_slug}`}>
-      <div className="flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+      <div className="flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:opacity-80 hover:ml-4 transition-all duration-300">
         <div className="relative w-full md:w-[30%] h-[200px] md:h-[180px] rounded-xl overflow-hidden">
           <Image
             src={post.thumbnail || '/images/default-blog-thumbnail.jpg'}

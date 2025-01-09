@@ -2,8 +2,10 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import Background from '@/components/Home/Background';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
+import ModalComponent from '@/components/ModalComponent';
 import PageTransition from '@/components/Layout/PageTransition';
 import { RecoilRoot } from 'recoil';
 import StairTransition from '@/components/Layout/StairTransition';
@@ -33,6 +35,8 @@ export const NextLayout = ({ children }: Props) => {
         <Header />
         <StairTransition />
         <PageTransition>{children}</PageTransition>
+        <Background />
+        <ModalComponent />
         <Footer />
       </div>
     </>

@@ -13,10 +13,6 @@ export const LINKS = [
     path: '/about',
   },
   {
-    name: 'Skills',
-    path: '/resume',
-  },
-  {
     name: 'Projects',
     path: '/works',
   },

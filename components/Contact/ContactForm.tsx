@@ -43,7 +43,7 @@ export const ContactForm = () => {
 
   const onSubmit = async (data: ContactFormType) => {
     if (data.name === '' || data.email === '' || data.message === '') {
-      toast.error('Please fill out the form');
+      toast.error('필수 항목들을 모두 입력해주세요.');
       return;
     }
 
@@ -59,15 +59,15 @@ export const ContactForm = () => {
       });
 
       if (response.ok) {
-        toast.success('Email sent successfully!');
+        toast.success('이메일 전송에 성공했습니다.');
         setFormData(initialContactFormState);
         reset(initialContactFormState);
       } else {
-        throw new Error('Failed to send email');
+        throw new Error('이메일 전송에 실패했습니다.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast.error('An unknown error occurred');
+      toast.error('이메일 전송에 실패했습니다.');
     } finally {
       setDisableSubmit(false);
     }
@@ -129,7 +129,7 @@ export const ContactForm = () => {
         <Input
           id="email"
           type="email"
-          placeholder="WhiteMouseDev@gmail.com"
+          placeholder="email@email.com"
           className="w-full"
           {...register('email', {
             required: '이메일은 필수 항목입니다.',
@@ -162,7 +162,7 @@ export const ContactForm = () => {
         <Input
           id="phone"
           type="text"
-          placeholder="010-0000-0000"
+          placeholder="010-1111-2222"
           {...register('phone')}
           value={formData.phone}
           className="w-full"
@@ -180,7 +180,7 @@ export const ContactForm = () => {
         </label>
         <Select value={formData.service} onValueChange={handleServiceChange}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select a service" />
+            <SelectValue placeholder="서비스를 선택해주세요" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
@@ -217,7 +217,7 @@ export const ContactForm = () => {
       {/* Submit Button */}
       <Button
         size="md"
-        className="w-full"
+        className="w-full hover:bg-accent-hover"
         type="submit"
         disabled={isSubmitting || disableSubmit}
       >
