@@ -2,10 +2,19 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { ComponentProps } from 'react';
 import Image from 'next/image';
 import { IoIosClose } from 'react-icons/io';
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import remarkGfm from 'remark-gfm';
 import { useStore } from '@/store';
+
+type CodeProps = ComponentProps<'code'> & {
+  inline?: boolean;
+  children?: React.ReactNode;
+};
 
 const ModalComponent: React.FC = () => {
   const { isModalOpen, setModalOpen, project } = useStore();
@@ -66,7 +75,36 @@ const ModalComponent: React.FC = () => {
                       </ul>
                     )}
                     <div className="prose prose-invert max-w-none">
-                      <ReactMarkdown>{project?.content || ''}</ReactMarkdown>
+                      <ReactMarkdown
+                        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                        components={{
+                          code({
+                            inline,
+                            className,
+                            children,
+                            ...props
+                          }: CodeProps) {
+                            const match = /language-(\w+)/.exec(
+                              className || ''
+                            );
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                style={materialDark}
+                                language={match[1]}
+                                PreTag="div"
+                              >
+                                {String(children).replace(/\n$/, '')}
+                              </SyntaxHighlighter>
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                        }}
+                      >
+                        {project?.content || ''}
+                      </ReactMarkdown>
                     </div>
                   </div>
                 </div>
