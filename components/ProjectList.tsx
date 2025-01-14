@@ -25,7 +25,7 @@ const ProjectList = () => {
         Projects
       </motion.h2>
 
-      <div className="grid gap-6">
+      <div className="grid gap-20">
         {PROJECT_LIST.map((project) => (
           <Project
             key={project.id}

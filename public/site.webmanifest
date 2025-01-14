@@ -1,0 +1,22 @@
+{
+    "name": "김건우 포트폴리오",
+    "short_name": "김건우",
+    "description": "끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.",
+    "start_url": "/",
+    "icons": [{
+            "src": "/web-app-manifest-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/web-app-manifest-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "theme_color": "#18181B",
+    "background_color": "#18181B",
+    "display": "standalone"
+}

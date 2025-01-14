@@ -11,20 +11,28 @@ interface PageTransitionProps {
 
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const pathname = usePathname();
+
   return (
-    <AnimatePresence>
-      <div key={pathname}>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <motion.div
           initial={{ opacity: 1 }}
           animate={{
             opacity: 0,
-            transition: { delay: 1, duration: 0.4, ease: 'easeInOut' },
+            transition: { delay: 0.5, duration: 0.3, ease: 'easeInOut' },
           }}
-          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
+          className="fixed inset-0 bg-primary z-[30] pointer-events-none"
         />
         {children}
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 };
+
 export default PageTransition;

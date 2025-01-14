@@ -14,7 +14,7 @@ export const LINKS = [
   },
   {
     name: 'Projects',
-    path: '/works',
+    path: '/projects',
   },
   {
     name: 'Blog',

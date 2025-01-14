@@ -10,7 +10,7 @@ import { Suspense, useRef, useState } from 'react';
 const StarBackground = (props: ThreeElements['group']) => {
   const ref = useRef<THREE.Points>(null);
   const [sphere] = useState(() => {
-    const arr = new Float32Array(500 * 3);
+    const arr = new Float32Array(700 * 3);
     return random.inSphere(arr, { radius: 1.2 });
   });
 
@@ -26,10 +26,13 @@ const StarBackground = (props: ThreeElements['group']) => {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
         <PointMaterial
           transparent
-          color="#fff"
-          size={0.002}
+          color="#f1f1f1"
+          size={0.003}
           sizeAttenuation={true}
           depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          vertexColors={false}
+          opacity={0.8}
         />
       </Points>
     </group>
