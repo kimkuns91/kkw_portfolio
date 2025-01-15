@@ -1,4 +1,4 @@
-import { IProject } from '@/types';
+import { IProject } from '@/interface';
 import { create } from 'zustand';
 
 interface IStore {
