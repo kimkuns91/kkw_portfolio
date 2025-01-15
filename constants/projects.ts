@@ -1,11 +1,8 @@
 import { IProject } from '@/interface';
 
-export const sortProjects = (projects: IProject[]) => {
-  return [...projects].sort((a, b) => b.id - a.id); // 내림차순 정렬
-};
-
-export const PROJECT_LIST = sortProjects([
-  {
+// 프로젝트 객체로 정의
+export const Projects = {
+  ZENIAN: {
     id: 1,
     title: 'ZENI AN',
     url_slug: 'ZENI_AN',
@@ -52,7 +49,8 @@ Node.js와 Express.js를 사용하여 사용자 행동 패턴을 분석하는 �
     `,
     github_url: '',
   },
-  {
+
+  ABRAXAS: {
     id: 2,
     title: 'ABRAXAS',
     url_slug: 'Abraxas',
@@ -95,7 +93,7 @@ ABRAXAS는 기존 Cafe24 플랫폼을 기반으로 하되,
     `,
     github_url: '',
   },
-  {
+  LAW_FIRM_JK: {
     id: 3,
     title: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
     url_slug: '법무법인_정곡',
@@ -148,7 +146,7 @@ ABRAXAS는 기존 Cafe24 플랫폼을 기반으로 하되,
 `,
     github_url: '',
   },
-  {
+  TK_TRADE: {
     id: 4,
     title: 'TK-Trade',
     url_slug: 'tk_trade',
@@ -209,7 +207,7 @@ TK-Trade는 수출용 공학 장비를 소개하기 위해 영문으로 제작�
 - ✅ 검색 및 자동 완성 기능을 통해 사용자의 제품 탐색 경험 개선.`,
     github_url: '',
   },
-  {
+  LAW_AND_PEOPLE: {
     id: 5,
     title: '법무법인 법과 사람들',
     url_slug: '법무법인_법과_사람들',
@@ -265,10 +263,9 @@ TK-Trade는 수출용 공학 장비를 소개하기 위해 영문으로 제작�
     - ✅ 비개발자가 쉽게 콘텐츠를 관리할 수 있는 게시판 에디터 제공.
     - ✅ AWS 인프라를 활용하여 안정적인 서버 환경과 원활한 서비스 운영을 지원.
     `,
-
     github_url: '',
   },
-  {
+  DOGGIENUTS: {
     id: 6,
     title: 'Doggienuts',
     url_slug: 'doggienuts',
@@ -323,7 +320,7 @@ React.js와 Node.js 기반으로 개발되었으며, CI/CD 파이프라인은 Gi
 - ✅ 다양한 디바이스에서 최적화된 사용자 경험 제공.`,
     github_url: '',
   },
-  {
+  D_BLOCK: {
     id: 7,
     title: 'D.Block 재고관리 어플리케이션',
     url_slug: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
@@ -341,7 +338,7 @@ Firebase를 이용해 실시간 데이터베이스와 인증 시스템을 구축
 장함`,
     github_url: '',
   },
-  {
+  SHORT_FORM: {
     id: 8,
     title: '숏폼 동영상 OTT 플랫폼 기획 및 개발',
     url_slug: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
@@ -361,7 +358,7 @@ UX/UI 디자인부터 기술 구현까지 전반적인 프로젝트 관리와 �
 `,
     github_url: '',
   },
-  {
+  PSYCHOLOGY: {
     id: 9,
     title: '가톨릭대학교 심리학 연구 프로그램 기획 및 개발',
     url_slug: '가톨릭대학교_심리학',
@@ -420,7 +417,7 @@ MongoDB를 데이터베이스로 사용하여 데이터를 효율적으로 저�
     `,
     github_url: '',
   },
-  {
+  PORTFOLIO: {
     id: 10,
     title: '포트폴리오 웹사이트 (Next.js 15)',
     url_slug: '포트폴리오',
@@ -481,4 +478,17 @@ Next.js 15와 React 19가 출시됨에 따라 최신 기술 학습 및 마이그
 - ✅ 반응형 디자인과 애니메이션으로 사용 경험 강화.`,
     github_url: 'https://github.com/kimkuns91/kkw_portfolio',
   },
-]);
+} as const;
+
+// 정렬 함수
+export const sortProjects = (projects: IProject[]) => {
+  return [...projects].sort((a, b) => b.id - a.id);
+};
+
+// 배열로 변환
+export const PROJECT_LIST = sortProjects(
+  Object.values(Projects) as unknown as IProject[]
+);
+
+// 특정 프로젝트 찾기 예시:
+// const tkTradeProject = Projects.TK_TRADE;
