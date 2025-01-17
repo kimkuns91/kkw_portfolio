@@ -27,7 +27,7 @@ export default function BlogPage() {
     // 현재 ref 요소 관찰 시작
     if (observerRef.current) {
       observer.observe(observerRef.current);
-    }
+    } 
 
     // 컴포넌트 언마운트 시 관찰 중단
     return () => observer.disconnect();
@@ -37,7 +37,7 @@ export default function BlogPage() {
 
   return (
     <MotionScrollSection>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container min-h-screen mx-auto">
         <h2 className="h2 text-center gradientMoveTitle mb-6">게시글</h2>
         <p className="text-neutral text-center mb-16">
           <span className="text-red-500">*</span> Velog.io API를 활용하여

@@ -49,15 +49,17 @@ Node.js와 Express.js를 사용하여 사용자 행동 패턴을 분석하는 �
     `,
     github_url: '',
   },
-
   ABRAXAS: {
     id: 2,
     title: 'ABRAXAS',
     url_slug: 'Abraxas',
     description:
       'Cafe24 플랫폼을 활용하여 맞춤형 쇼핑몰을 개발하고, UI/UX 개선 및 안정적인 서비스 운영을 지원한 프로젝트입니다.',
-    link: '',
-    thumbnail: ['/projects/abraxas/abraxas_01.png'],
+    link: 'https://abraxaskorea.com/',
+    thumbnail: [
+      '/projects/abraxas/abraxas_02.webp',
+      '/projects/abraxas/abraxas_01.png',
+    ],
     created_at: '2022.01 - 2022.03',
     stack: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express.js'],
     content: `
@@ -93,8 +95,50 @@ ABRAXAS는 기존 Cafe24 플랫폼을 기반으로 하되,
     `,
     github_url: '',
   },
-  LAW_FIRM_JK: {
+  IC_ENTERTAINMENT: {
     id: 3,
+    title: 'IC 엔터테인먼트 홈페이지 개발',
+    url_slug: 'IC_엔터테인먼트',
+    description:
+      'React, Three.js, Framer를 사용하여 역동적인 3D 홈페이지를 구현한 프로젝트입니다.',
+    link: 'https://ic-korea.com/',
+    thumbnail: ['/projects/ic/ic_01.webp'],
+    created_at: '2024.01 -',
+    stack: ['React', 'Three.js', 'Framer', 'Gabia Container Hosting'],
+    content: `
+## 🎯 프로젝트 요약
+IC 엔터테인먼트의 소개 홈페이지를 React로 개발하고,  
+Three.js와 Framer를 활용하여 역동적인 3D 요소와 원페이지 디자인을 구현했습니다.  
+가비아 컨테이너 호스팅 서비스를 이용해 안정적으로 배포하였습니다.
+
+---
+
+## 🧐 프로젝트 배경
+IC 엔터테인먼트는 자신들의 브랜드를 강조할 수 있는 창의적이고 역동적인 홈페이지를 원했습니다.  
+기존 호스팅 서비스는 가비아에 이미 결제된 상태였기에,  
+가비아 컨테이너 호스팅 서비스를 활용해 최적화된 환경에서 배포가 필요했습니다.
+
+---
+
+## 🛠️ 접근 방식
+- **🎨 프론트엔드 개발**: React를 사용하여 인터랙티브한 사용자 경험을 제공.
+- **💡 3D 디자인**: Three.js를 활용하여 3D 정육면체와 역동적인 시각 요소 구현.
+- **🎬 애니메이션**: Framer를 이용해 부드럽고 매력적인 애니메이션 효과 추가.
+- **🌐 배포**: 가비아 컨테이너 호스팅 서비스를 활용하여 안정적으로 배포.
+- **📱 반응형 디자인**: 다양한 디바이스에서 최적화된 사용자 경험 제공.
+
+---
+
+## 🏆 결과
+- ✅ Three.js와 Framer를 활용한 창의적인 3D 디자인과 애니메이션 구현.
+- ✅ React 기반의 인터랙티브한 원페이지 소개 홈페이지 완성.
+- ✅ 가비아 컨테이너 호스팅을 통해 안정적이고 효율적인 배포 완료.
+- ✅ 클라이언트의 요구에 부합하는 브랜드 아이덴티티 강조.
+    `,
+    github_url: '',
+  },
+  LAW_FIRM_JK: {
+    id: 4,
     title: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
     url_slug: '법무법인_정곡',
     description:
@@ -146,8 +190,27 @@ ABRAXAS는 기존 Cafe24 플랫폼을 기반으로 하되,
 `,
     github_url: '',
   },
+  LYNCARE: {
+    id: 5,
+    title: '린케어 홈페이지 개발',
+    url_slug: '라인케어',
+    description: '',
+    link: 'https://www.lyncare.co.kr/',
+    thumbnail: [
+      '/projects/lyncare/lyncare_01.png',
+      '/projects/lyncare/lyncare_02.png',
+      '/projects/lyncare/lyncare_03.png',
+      '/projects/lyncare/lyncare_04.png',
+    ],
+    created_at: '2024.01 -',
+    stack: ['Next.js', 'AWS', 'Youtube API'],
+    content: `
+
+    `,
+    github_url: '',
+  },
   TK_TRADE: {
-    id: 4,
+    id: 6,
     title: 'TK-Trade',
     url_slug: 'tk_trade',
     description:
@@ -204,16 +267,17 @@ TK-Trade는 수출용 공학 장비를 소개하기 위해 영문으로 제작�
 - ✅ NodeMailer를 활용한 효율적인 이메일 문의 기능 구현.
 - ✅ AWS 인프라와 CI/CD 적용으로 안정적인 서비스 제공.
 - ✅ 반응형 디자인 적용 및 성능 최적화로 빠른 카테고리 전환 성능 확보.
-- ✅ 검색 및 자동 완성 기능을 통해 사용자의 제품 탐색 경험 개선.`,
+- ✅ 검색 및 자동 완성 기능을 통해 사용자의 제품 탐색 경험 개선.
+`,
     github_url: '',
   },
   LAW_AND_PEOPLE: {
-    id: 5,
+    id: 7,
     title: '법무법인 법과 사람들',
     url_slug: '법무법인_법과_사람들',
     description:
       'React.js, TypeScript, AWS, YouTube API를 활용하여 친근한 느낌의 법무법인 홈페이지를 구축하고, 동영상 관리 기능을 추가한 프로젝트입니다.',
-    link: '',
+    link: 'https://www.lawandpeople.co.kr/',
     thumbnail: [
       '/projects/lawandpeople/lawandpeople_01.png',
       '/projects/lawandpeople/lawandpeople_02.png',
@@ -266,7 +330,7 @@ TK-Trade는 수출용 공학 장비를 소개하기 위해 영문으로 제작�
     github_url: '',
   },
   DOGGIENUTS: {
-    id: 6,
+    id: 8,
     title: 'Doggienuts',
     url_slug: 'doggienuts',
     description:
@@ -317,49 +381,219 @@ React.js와 Node.js 기반으로 개발되었으며, CI/CD 파이프라인은 Gi
 - ✅ 영어와 중국어를 지원하는 직관적인 다국어 웹사이트 완성.
 - ✅ AWS 기반으로 안정적인 서버 운영 및 자동화 배포 환경 구축.
 - ✅ React.js와 Node.js의 효율적인 사용으로 빠른 로딩 속도와 안정성 확보.
-- ✅ 다양한 디바이스에서 최적화된 사용자 경험 제공.`,
-    github_url: '',
-  },
-  D_BLOCK: {
-    id: 7,
-    title: 'D.Block 재고관리 어플리케이션',
-    url_slug: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
-    description: '',
-    link: '',
-    thumbnail: ['/projects/1.png'],
-    created_at: '2023.08 - 2023.12',
-    stack: ['Flutter', 'Firebase'],
-    content: `
-  Flutter를 활용하여 크로스 플랫폼 재고관리 애플리케이션을 설계 및 개발함
-Firebase를 이용해 실시간 데이터베이스와 인증 시스템을 구축하여 안정적인 데이터
-관리와 사용자 인증을 구현함
-사용자 친화적인 UI/UX를 설계하여 쉽고 직관적인 재고 관리가 가능하도록 지원함
-모바일 환경에 최적화된 성능을 제공하며, 다양한 디바이스에서의 원활한 사용성을 보
-장함`,
-    github_url: '',
-  },
-  SHORT_FORM: {
-    id: 8,
-    title: '숏폼 동영상 OTT 플랫폼 기획 및 개발',
-    url_slug: '법무법인 정곡 홈페이지 / 상담 신청 및 관리 기능 개발',
-    description: '',
-    link: '',
-    thumbnail: ['/projects/1.png'],
-    created_at: '2024.01 -',
-    stack: ['Next.js', 'AWS', 'Youtube API'],
-    content: `
- Next.js를 활용하여 SEO 최적화와 고성능의 프론트엔드를 구축함
-동영상 스트리밍 및 재생 환경을 최적화하여 다양한 디바이스에서 원활하게 콘텐츠를
-제공할 수 있도록 설계
-플랫폼 기획 초기 단계부터 참여하여 사용자 요구사항 분석, 기능 정의, 그리고 개발 로
-드맵 수립에 기여함
-UX/UI 디자인부터 기술 구현까지 전반적인 프로젝트 관리와 협업을 통해 플랫폼 완성
-도를 높임
+- ✅ 다양한 디바이스에서 최적화된 사용자 경험 제공.
 `,
     github_url: '',
   },
-  PSYCHOLOGY: {
+  LYNPLUS: {
     id: 9,
+    title: 'LynPlus 홈페이지',
+    url_slug: 'lynplus',
+    description:
+      'React를 사용하여 실버케어 장비 소개 홈페이지를 개발한 프로젝트입니다.',
+    link: 'http://lynplus.kr',
+    thumbnail: ['/projects/lynplus/lynplus_01.webp'],
+    created_at: '2023.08 - 2023.10',
+    stack: ['React', 'Cafe24 Hosting'],
+    content: `
+## 🎯 프로젝트 요약
+LynPlus는 실버케어 장비를 소개하는 홈페이지로, React를 사용하여 개발되었습니다.  
+깔끔한 디자인과 함께 제품 소개 및 규격을 자세히 보여주는 페이지를 구현했으며,  
+여러 정부 지원 정책 사이트와 연결 기능을 포함하고,  
+관리자 페이지를 통해 배너 이미지를 쉽게 업데이트할 수 있도록 했습니다.
+
+---
+
+## 🧐 프로젝트 배경
+LynPlus는 고주파 심부열 자극기 및 스마트 터치 실버 테이블과 같은 실버케어 장비를 판매하며,  
+정부와의 계약 체결을 주요 목적으로 하는 회사입니다.  
+이를 위해 제품의 상세한 정보를 전달하고, 관련 정책 사이트와 연결되는 기능이 필요했습니다.  
+또한, 클라이언트는 Cafe24에 이미 결제된 호스팅 환경을 활용하고자 했습니다.
+
+---
+
+## 🛠️ 접근 방식
+- **🎨 UI/UX 디자인**: React를 사용하여 제품 중심의 직관적이고 깔끔한 디자인 구현.
+- **📡 배포**: Cafe24 호스팅 서비스를 이용해 안정적으로 배포.
+- **💡 제품 소개**: 제품 소개 및 규격을 한눈에 볼 수 있도록 상세 페이지 구성.
+- **🔗 사이트 연결**: 정부 지원 정책 사이트와 연결하여 사용자 편의성 향상.
+- **🖼️ 배너 관리**: 관리자 페이지에서 배너 이미지를 업로드하고 실시간으로 업데이트 가능하도록 구현.
+
+---
+
+## 🏆 결과
+- ✅ 실버케어 장비의 특징과 규격을 명확히 전달하는 사용자 친화적 홈페이지 구축.
+- ✅ 관리자 페이지를 통해 배너 이미지 변경과 유지보수 용이성 확보.
+- ✅ Cafe24 기반으로 안정적인 배포 및 운영 환경 제공.
+- ✅ 관련 사이트와의 연결로 사용자 경험 및 접근성 향상.
+    `,
+    github_url: '',
+  },
+  WESTLOKE: {
+    id: 10,
+    title: 'Wesloke Amplifier',
+    url_slug: 'westloke_amplifier',
+    description:
+      'Next.js 14와 AWS를 사용하여 수제 앰프 제작 회사의 홈페이지를 개발한 프로젝트입니다.',
+    link: '',
+    thumbnail: [
+      '/projects/westloke/westloke_01.png',
+      '/projects/westloke/westloke_02.png',
+    ],
+    created_at: '2023.11 - 2024.01',
+    stack: [
+      'Next.js 14',
+      'AWS EC2',
+      'AWS Load Balancer',
+      'PayPal API',
+      'Nodemailer',
+    ],
+    content: `
+## 🎯 프로젝트 요약
+미국 워싱턴 레드먼드에 위치한 수제 앰프 제작 회사 Wesloke Amplifier의 홈페이지를 개발했습니다.  
+Next.js 14를 사용하여 프론트엔드를 구축하고, AWS EC2와 Load Balancer를 활용하여 안정적인 배포를 완료했습니다.  
+PayPal API를 이용해 인터넷 결제 기능을 구현했으나, 현재는 이메일 주문 방식(Nodemailer 사용)으로 운영되고 있습니다.
+
+---
+
+## 🧐 프로젝트 배경
+Wesloke Amplifier는 회사 소개와 앰프 스펙 정보를 제공하는 웹사이트를 통해 고객과의 접점을 강화하고자 했습니다.  
+추후 인터넷 결제를 지원하기 위한 PayPal API 통합을 요청했으며,  
+현재는 회사 사정으로 이메일 주문 시스템을 통해 운영되고 있습니다.
+
+---
+
+## 🛠️ 접근 방식
+- **🎨 프론트엔드 개발**: Next.js 14를 사용하여 반응형 웹사이트와 직관적인 사용자 인터페이스 구현.
+- **💡 결제 시스템**: PayPal API를 통합하여 온라인 결제 기능 구현 (현재 비활성화).
+- **📧 이메일 주문**: Nodemailer를 사용하여 이메일 문의 및 주문 기능 개발.
+- **🌐 배포 환경**: AWS EC2와 Load Balancer를 활용하여 안정적이고 확장 가능한 배포 환경 구축.
+- **📱 반응형 디자인**: 모바일 및 데스크톱 환경에서 최적화된 사용자 경험 제공.
+
+---
+
+## 🏆 결과
+- ✅ Next.js와 AWS 기반의 안정적이고 성능 높은 홈페이지 구축.
+- ✅ PayPal API를 활용한 결제 기능 구현 (추후 활성화 가능).
+- ✅ 이메일 문의 및 주문 시스템으로 고객과의 접근성 강화.
+- ✅ 클라이언트 요구에 맞춘 제품 정보 제공 및 브랜딩 강화.
+    `,
+    github_url: '',
+  },
+  SHORT_FORM: {
+    id: 11,
+    title: '숏폼 동영상 OTT 플랫폼 기획 및 개발',
+    url_slug: 'shortform_ott',
+    description:
+      'HG 엔터테인먼트를 위한 숏폼 동영상 OTT 플랫폼 프로토타입을 개발한 프로젝트입니다.',
+    link: '',
+    thumbnail: [
+      '/projects/shortform/shortform_01.png',
+      '/projects/shortform/shortform_02.png',
+    ],
+    created_at: '2024.01 -',
+    stack: [
+      'Next.js 14',
+      'Recoil',
+      'MongoDB',
+      'Google Cloud Storage',
+      'video.js',
+    ],
+    content: `
+## 🎯 프로젝트 요약
+HG 엔터테인먼트를 위한 숏폼 동영상 OTT 플랫폼의 테스트 버전을 개발했습니다.  
+이 프로젝트는 TopToon의 실사화 드라마 콘텐츠를 기반으로 서비스 기획 및 동영상 플랫폼의 동작을 검증하기 위해 제작되었습니다.  
+Next.js 14를 사용하여 웹사이트를 구축하고, Google Cloud Storage를 활용해 동영상을 저장 및 스트리밍하며, video.js를 이용한 커스텀 동영상 플레이어를 구현했습니다.
+
+---
+
+## 🧐 프로젝트 배경
+HG 엔터테인먼트는 웹툰 기반 드라마 콘텐츠를 제공하기 위한 숏폼 동영상 OTT 플랫폼을 준비하고 있었습니다.  
+이 서비스는 추후 정식 출시를 위한 기능 검증 및 사용자 피드백 수집을 목적으로 기획되었습니다.  
+특히 동영상 플레이어 커스터마이징과 클라우드 기반의 안정적인 동영상 스트리밍이 주요 요구사항이었습니다.
+
+---
+
+## 🛠️ 접근 방식
+- **🎨 프론트엔드 개발**: Next.js 14를 사용하여 반응형 웹사이트 구현.
+- **💡 상태관리**: Recoil을 사용하여 동영상 플레이어 상태 및 사용자 인터랙션 관리.
+- **📡 동영상 저장 및 스트리밍**: Google Cloud Storage를 활용하여 동영상을 저장하고 스트리밍.
+- **🎥 동영상 플레이어**: video.js를 사용하여 커스텀 동영상 플레이어 구현 및 기능 테스트.
+- **📊 데이터베이스**: 테스트 목적의 MongoDB를 사용하여 데이터 저장 및 관리.
+
+---
+
+## 🏆 결과
+- ✅ 안정적인 동영상 스트리밍과 커스텀 플레이어 동작을 검증.
+- ✅ Google Cloud Storage와의 연동을 통해 확장성을 고려한 인프라 구현.
+- ✅ 사용자 인터페이스와 플레이어 상태 관리 테스트 완료.
+- ✅ OTT 플랫폼 기획 및 동작 검증을 위한 성공적인 테스트 단계 완료.
+    `,
+    github_url: 'https://github.com/kimkuns91/HamCatStream/tree/main',
+  },
+  EBTI: {
+    id: 12,
+    title: 'EBTI 프로젝트',
+    url_slug: 'ebti',
+    description:
+      '기업가 행동유형 분석 서비스를 웹사이트로 구현한 프로젝트입니다.',
+    link: '',
+    thumbnail: [
+      '/projects/ebti/ebti_01.png',
+      '/projects/ebti/ebti_02.png',
+      '/projects/ebti/ebti_03.png',
+      '/projects/ebti/ebti_04.png',
+    ],
+    created_at: '2024.02 - 2024.05',
+    stack: [
+      'Next.js 14',
+      'Redux',
+      'MongoDB',
+      'next-auth',
+      'Python',
+      'Flask/FastAPI',
+      'Nodemailer',
+      'react-to-pdf',
+    ],
+    content: `
+## 🎯 프로젝트 요약
+EBTI 프로젝트는 한양대학교 박혜영 교수님의 의뢰로 개발된 기업가 행동유형 분석 서비스입니다.  
+Next.js 14를 사용하여 웹사이트를 구축하였으며, Python을 활용한 데이터 분석과 MongoDB 기반의 유저 데이터 관리가 포함되었습니다.  
+결과는 이메일로 전송되며, PDF로 저장할 수 있는 기능을 제공합니다.
+
+---
+
+## 🧐 프로젝트 배경
+박혜영 교수님은 기업가 행동유형 분석을 통해 개인화된 결과를 제공하는 서비스를 원했습니다.  
+서비스는 사용자 인증, 데이터 분석, 결과 전송 및 저장 기능을 요구했으며,  
+특히 사용자가 직관적으로 서비스를 이용할 수 있는 UI/UX가 필요했습니다.
+
+---
+
+## 🛠️ 접근 방식
+- **🎨 프론트엔드 개발**: Next.js 14를 사용하여 반응형 웹사이트를 구축.
+- **💡 회원 인증**: next-auth를 사용하여 카카오톡 및 구글 로그인을 지원.
+- **📊 데이터 관리**: MongoDB를 이용하여 확장성을 고려한 데이터베이스 구성.
+- **📡 API 구현**: Next.js API Routes를 통해 회원 인증 및 데이터 처리를 구현.
+- **🔍 데이터 분석**: Python (Flask 또는 FastAPI)을 활용하여 데이터 분석 및 처리 로직 구현.
+- **📧 결과 전송 및 PDF 저장**:
+  - Nodemailer를 사용하여 이메일로 분석 결과 전송.
+  - react-to-pdf를 통해 A4 크기로 최적화된 PDF 파일로 결과 저장.
+- **🖥️ 관리자 페이지**:
+  - 사용자 관리, 쿠폰 관리, 데이터 열람 기능을 포함하여 효율적인 관리 시스템 구현.
+
+---
+
+## 🏆 결과
+- ✅ 직관적인 사용자 인터페이스와 효율적인 데이터 처리로 사용자 경험 강화.
+- ✅ Python과 MongoDB를 결합하여 정확하고 신뢰성 높은 데이터 분석 제공.
+- ✅ 이메일 전송 및 PDF 저장 기능을 통해 사용자 접근성 확대.
+- ✅ 관리자 페이지를 통해 효율적인 서비스 운영 지원.
+    `,
+    github_url: '',
+  },
+  PSYCHOLOGY: {
+    id: 13,
     title: '가톨릭대학교 심리학 연구 프로그램 기획 및 개발',
     url_slug: '가톨릭대학교_심리학',
     description:
@@ -418,7 +652,7 @@ MongoDB를 데이터베이스로 사용하여 데이터를 효율적으로 저�
     github_url: '',
   },
   PORTFOLIO: {
-    id: 10,
+    id: 14,
     title: '포트폴리오 웹사이트 (Next.js 15)',
     url_slug: '포트폴리오',
     description:
@@ -475,7 +709,8 @@ Next.js 15와 React 19가 출시됨에 따라 최신 기술 학습 및 마이그
 - ✅ Zustand를 통한 간결하고 직관적인 상태 관리 도입.
 - ✅ 3D WebGL 배경을 적용한 몰입도 높은 포트폴리오 사이트 완성.
 - ✅ CI/CD와 Vercel 무료 플랜을 활용한 자동화 배포 완료.
-- ✅ 반응형 디자인과 애니메이션으로 사용 경험 강화.`,
+- ✅ 반응형 디자인과 애니메이션으로 사용 경험 강화.
+`,
     github_url: 'https://github.com/kimkuns91/kkw_portfolio',
   },
 } as const;

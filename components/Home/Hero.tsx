@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   return (
-    <div className="container mx-auto h-full">
+    <div className="w-full mx-auto h-full">
       <div className="flex flex-col xl:flex-row items-center justify-between xl:pb-24">
         {/* text */}
         <div className="text-center xl:text-left order-2 xl:order-none">
@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
             initial="hidden"
             animate="visible"
             variants={slideInFromLeft(1.2)}
-            className="text-7xl font-bold mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6"
           >
             <span className="gradientMoveTitle">김건우</span>
             입니다

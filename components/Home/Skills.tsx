@@ -34,7 +34,7 @@ const Skills: React.FC = () => {
       >
         {/* 왼쪽 카테고리 메뉴 */}
         <div className="w-full md:w-48">
-          <div className="flex justify-between md:flex-col border-b-2 md:border-b-0 md:border-l-2 border-accent/30">
+          <div className="grid grid-cols-2 md:grid-cols-1 md:border-b-0 md:border-l-2 border-accent/30">
             {SKILL_CATEGORY_LIST.map((item) => (
               <button
                 onClick={() => setCurrentIndex(item.index)}

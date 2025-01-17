@@ -21,7 +21,7 @@ const MobileNav = () => {
       <SheetTrigger className="flex justify-center items-center">
         <CiMenuFries className="text-[32px] text-accent" />
       </SheetTrigger>
-      <SheetContent className="flex flex-col border-secondary">
+      <SheetContent className="flex flex-col border-secondary z-[999]">
         <SheetTitle className="sr-only">네비게이션 메뉴</SheetTitle>
         {/* logo */}
         <div className="mt-32 mb-40 text-center text-2xl">

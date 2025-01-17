@@ -11,7 +11,7 @@ import { slideInFromLeft } from '@/utils/motions';
 const AboutPage: React.FC = () => {
   return (
     <MotionScrollSection>
-      <div className="w-full relative flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between">
+      <div className="container relative flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between">
         <div className="flex-[1.5]">
           <motion.h2
             initial="hidden"

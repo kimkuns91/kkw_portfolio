@@ -49,6 +49,9 @@
   .scrollbar::-webkit-scrollbar-horizontal {
     display: none;
   }
+  .scrollbar-x-none::-webkit-scrollbar-horizontal {
+    display: none;
+  }
 
   .gradientMoveTitle {
     background-clip: text;
