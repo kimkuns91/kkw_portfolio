@@ -3,7 +3,7 @@
 import 'github-markdown-css';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from 'react-icons/io';
 
 import { FaGithub } from 'react-icons/fa';
@@ -25,10 +25,21 @@ const ModalComponent: React.FC = () => {
   const { isModalOpen, setModalOpen, project } = useStore();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
   const handleClose = () => {
     setModalOpen(false);
     setCurrentImageIndex(0);
-    document.body.style.overflow = 'auto';
   };
 
   const nextImage = () => {
