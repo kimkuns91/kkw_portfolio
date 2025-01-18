@@ -13,24 +13,18 @@ const Hero: React.FC = () => {
         {/* text */}
         <div className="text-center xl:text-left order-2 xl:order-none">
           <motion.p
-            initial="hidden"
-            animate="visible"
             variants={slideInFromLeft(1)}
             className="text-xl text-neutral-dark mb-4"
           >
             Fullstack Developer
           </motion.p>
           <motion.h2
-            initial="hidden"
-            animate="visible"
             variants={slideInFromLeft(1.1)}
             className="h3 font-bold mb-4"
           >
             끊임없이 도전하고 배우는 개발자
           </motion.h2>
           <motion.h1
-            initial="hidden"
-            animate="visible"
             variants={slideInFromLeft(1.2)}
             className="text-5xl md:text-7xl font-bold mb-6"
           >
@@ -38,8 +32,6 @@ const Hero: React.FC = () => {
             입니다
           </motion.h1>
           <motion.p
-            initial="hidden"
-            animate="visible"
             variants={slideInFromLeft(1.3)}
             className="max-w-[500px] mb-9 text-white/80"
           >
@@ -50,8 +42,6 @@ const Hero: React.FC = () => {
           </motion.p>
           {/* btn and socials */}
           <motion.div
-            initial="hidden"
-            animate="visible"
             variants={slideInFromLeft(1.4)}
             className="flex flex-col xl:flex-row items-center gap-8"
           >
@@ -65,8 +55,6 @@ const Hero: React.FC = () => {
         </div>
         {/* photo */}
         <motion.div
-          initial="hidden"
-          animate="visible"
           variants={slideInFromRight(1)}
           className="order-1 xl:order-none mb-8 xl:mb-0 relative z-10"
         >

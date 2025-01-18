@@ -18,8 +18,6 @@ const Skills: React.FC = () => {
       className={cn('container py-10 md:py-20')}
     >
       <motion.h2
-        initial="hidden"
-        animate="visible"
         variants={slideInFromLeft(1.5)}
         className="text-2xl md:text-5xl font-bold text-accent mb-10"
       >
@@ -27,8 +25,6 @@ const Skills: React.FC = () => {
       </motion.h2>
 
       <motion.div
-        initial="hidden"
-        animate="visible"
         variants={slideInFromBottom(1.5)}
         className="flex flex-col md:flex-row gap-10"
       >
