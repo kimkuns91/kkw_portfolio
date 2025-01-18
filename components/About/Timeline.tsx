@@ -40,7 +40,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ year, events }) => (
 );
 
 const Timeline: React.FC = () => (
-  <div className="w-full md:max-w-4xl mx-auto divide-zinc-800 relative">
+  <div className="max-w-4xl mx-auto divide-zinc-800 relative">
     <div className="absolute h-full w-[4px] bg-gradient-to-b from-transparent via-accent to-transparent -left-4 md:-left-10"></div>
     <TimelineItem
       year="2024"

@@ -50,7 +50,7 @@ export const STATS = [
     text: 'Technologies mastered',
   },
   {
-    num: 74,
+    num: 140,
     text: 'Code commits',
   },
 ];

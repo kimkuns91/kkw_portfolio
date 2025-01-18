@@ -1,9 +1,11 @@
 import Hero from '@/components/Home/Hero';
+import Loading from '@/app/loading';
 import { Metadata } from 'next';
 import MotionScrollSection from '@/components/MotionSection';
 import ProjectList from '@/components/ProjectList';
 import Skills from '@/components/Home/Skills';
 import Stats from '@/components/Home/Stats';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: '김건우 포트폴리오 | Fullstack Developer',
@@ -62,10 +64,18 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <MotionScrollSection>
-      <Hero />
-      <Stats />
-      <Skills />
-      <ProjectList />
+      <Suspense fallback={<Loading />}>
+        <Hero />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Stats />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Skills />
+      </Suspense> 
+      <Suspense fallback={<Loading />}>
+        <ProjectList />
+      </Suspense>
     </MotionScrollSection>
   );
 }

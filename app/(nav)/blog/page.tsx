@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 
 import BlogPost from '@/components/Blog/BlogPost';
+import Loading from '@/app/loading';
 import MotionScrollSection from '@/components/MotionSection';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 
@@ -44,26 +45,29 @@ export default function BlogPage() {
           제작되었으며, 게시물을 클릭하면 Velog의 해당 게시물로 바로 이동할 수
           있습니다.
         </p>
-        <div className="flex flex-col space-y-8">
-          {data?.pages.map((page, i) => (
-            <React.Fragment key={i}>
-              {page.map((post) => (
-                <BlogPost key={post.id} post={post} />
-              ))}
-            </React.Fragment>
-          ))}
-        </div>
+        
+        <Suspense fallback={<Loading />}>
+          <div className="flex flex-col space-y-8">
+            {data?.pages.map((page, i) => (
+              <React.Fragment key={i}>
+                {page.map((post) => (
+                  <BlogPost key={post.id} post={post} />
+                ))}
+              </React.Fragment>
+            ))}
+          </div>
 
-        <div
-          ref={observerRef}
-          className="h-10 flex items-center justify-center"
-        >
-          {isFetchingNextPage
-            ? '로딩 중...'
-            : hasNextPage
-            ? '스크롤하여 더 보기'
-            : '더 이상 게시글이 없습니다'}
-        </div>
+          <div
+            ref={observerRef}
+            className="h-10 flex items-center justify-center"
+          >
+            {isFetchingNextPage
+              ? '로딩 중...'
+              : hasNextPage
+              ? '스크롤하여 더 보기'
+              : '더 이상 게시글이 없습니다'}
+          </div>
+        </Suspense>
       </div>
     </MotionScrollSection>
   );
