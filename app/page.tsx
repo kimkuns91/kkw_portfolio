@@ -72,7 +72,7 @@ export default function Home() {
       </Suspense>
       <Suspense fallback={<Loading />}>
         <Skills />
-      </Suspense> 
+      </Suspense>
       <Suspense fallback={<Loading />}>
         <ProjectList />
       </Suspense>
