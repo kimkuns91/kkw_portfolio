@@ -31,7 +31,7 @@ export const NextProvider = ({ children }: Props) => {
 export const NextLayout = ({ children }: Props) => {
   return (
     <>
-      <div className="z-[100]">
+      <div className="scrollbar z-[100]">
         <Header />
         <StairTransition />
         <PageTransition>{children}</PageTransition>
