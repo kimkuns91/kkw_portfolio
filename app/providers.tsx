@@ -8,6 +8,7 @@ import Header from '@/components/Layout/Header';
 import ModalComponent from '@/components/ModalComponent';
 import PageTransition from '@/components/Layout/PageTransition';
 import { RecoilRoot } from 'recoil';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import StairTransition from '@/components/Layout/StairTransition';
 import { Toaster } from 'react-hot-toast';
 
@@ -34,7 +35,10 @@ export const NextLayout = ({ children }: Props) => {
       <div className="scrollbar z-[100]">
         <Header />
         <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <PageTransition>
+          {children}
+          <SpeedInsights />
+        </PageTransition>
         <Background />
         <ModalComponent />
         <Footer />
