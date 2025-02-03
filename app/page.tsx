@@ -48,6 +48,10 @@ export const metadata: Metadata = {
   verification: {
     google: 'OVeZLitU9-LDnG-qusDsAXMFc51-Cht05K5i1pccDwQ',
   },
+  other: {
+    'naver-site-verification': '705551e6676d4d1979b3f0fd13de775040e4604b',
+  },
+
   robots: {
     index: true,
     follow: true,
