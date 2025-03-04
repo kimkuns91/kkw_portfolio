@@ -806,8 +806,7 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
       'React Query v5',
       'NodeMailer',
     ],
-    content: `
-    ## 🎯 프로젝트 요약
+    content: `## 🎯 프로젝트 요약
     Next.js 15로 마이그레이션하면서 관리자 페이지를 추가하고 다국어(한국어/영어) 기능을 구현한 프로젝트입니다.
     데이터베이스는 Prisma ORM과 MongoDB를 사용하였으며, 인증은 Next-Auth v5 (Beta)로 구현했습니다.
     
