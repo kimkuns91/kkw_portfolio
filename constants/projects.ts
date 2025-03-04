@@ -781,18 +781,18 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
     id: 15,
     title:
       'Westloke (NextJS15 마이그레이션 및 다국어 기능 추가, 관리자 페이지 추가)',
-    url_slug: 'westlake_v2',
+    url_slug: 'westloke_v2',
     description:
       'Next.js 15 App Router 기반으로 마이그레이션하고 다국어 기능과 관리자 페이지를 추가한 프로젝트입니다.',
     link: 'https://westloke-rho.vercel.app/',
     thumbnail: [
-      '/projects/westlake_v2/westloke_01.png',
-      '/projects/westlake_v2/westloke_02.png',
-      '/projects/westlake_v2/westloke_03.png',
-      '/projects/westlake_v2/westloke_04.png',
-      '/projects/westlake_v2/westloke_05.png',
-      '/projects/westlake_v2/westloke_06.png',
-      '/projects/westlake_v2/westloke_07.png',
+      '/projects/westloke_v2/westloke_01.png',
+      '/projects/westloke_v2/westloke_02.png',
+      '/projects/westloke_v2/westloke_03.png',
+      '/projects/westloke_v2/westloke_04.png',
+      '/projects/westloke_v2/westloke_05.png',
+      '/projects/westloke_v2/westloke_06.png',
+      '/projects/westloke_v2/westloke_07.png',
     ],
     created_at: '2025-01 - 2025-03',
     stack: [
