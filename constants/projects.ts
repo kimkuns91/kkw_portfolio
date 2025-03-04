@@ -777,6 +777,123 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
 `,
     github_url: 'https://github.com/kimkuns91/kkw_portfolio',
   },
+  WESTLOKE_V2: {
+    id: 15,
+    title:
+      'Westloke (NextJS15 마이그레이션 및 다국어 기능 추가, 관리자 페이지 추가)',
+    url_slug: 'westlake_v2',
+    description:
+      'Next.js 15 App Router 기반으로 마이그레이션하고 다국어 기능과 관리자 페이지를 추가한 프로젝트입니다.',
+    link: 'https://westloke-rho.vercel.app/',
+    thumbnail: [
+      '/projects/westlake_v2/westloke_01.png',
+      '/projects/westlake_v2/westloke_02.png',
+      '/projects/westlake_v2/westloke_03.png',
+      '/projects/westlake_v2/westloke_04.png',
+      '/projects/westlake_v2/westloke_05.png',
+      '/projects/westlake_v2/westloke_06.png',
+      '/projects/westlake_v2/westloke_07.png',
+    ],
+    created_at: '2025-01 - 2025-03',
+    stack: [
+      'Next.js 15',
+      'TypeScript',
+      'Tailwind CSS',
+      'next-intl',
+      'Prisma ORM',
+      'MongoDB',
+      'Next-Auth v5',
+      'React Query v5',
+      'NodeMailer',
+    ],
+    content: `
+    ## 🎯 프로젝트 요약
+    Next.js 15로 마이그레이션하면서 관리자 페이지를 추가하고 다국어(한국어/영어) 기능을 구현한 프로젝트입니다.
+    데이터베이스는 Prisma ORM과 MongoDB를 사용하였으며, 인증은 Next-Auth v5 (Beta)로 구현했습니다.
+    
+    ---
+    
+    ## 🛠️ 접근 방식
+    - **🌐 다국어 지원**: next-intl을 사용하여 한국어/영어 지원.
+    - **🔐 인증 시스템**: Next-Auth v5를 활용한 소셜 로그인(Google) 및 이메일 로그인 구현.
+    - **📧 문의하기 시스템**: NodeMailer를 활용하여 이메일 문의 기능 추가.
+    - **📨 뉴스레터 구독**: 사용자 이메일을 수집하고 구독 기능 추가.
+    - **👤 사용자 관리**: 프로필 수정 및 정보 업데이트 기능 제공.
+    - **📡 관리자 페이지**: 관리자 기능을 추가하여 콘텐츠 관리 가능.
+    - **📊 데이터 관리**: Prisma ORM과 MongoDB를 활용한 데이터 저장 및 관리.
+    - **📡 CI/CD & 배포**: Vercel을 사용하여 CI/CD 및 자동 배포 설정.
+    
+    ---
+    
+    ## ⭐️ 주요 기능 및 기술 스택
+    ### 기능
+    - **📱 반응형 디자인**: 모든 디바이스에서 최적화된 사용자 경험 제공
+    - **🌐 다국어 지원**: next-intl을 사용한 한국어/영어 지원
+    - **🔑 소셜 로그인**: Google 로그인 및 이메일 로그인 기능 제공
+    - **📧 문의하기 시스템**: NodeMailer를 통한 문의 메일 발송
+    - **📨 뉴스레터 구독**: 사용자 이메일을 통해 뉴스레터 기능 제공
+    - **👤 사용자 프로필 관리**: 회원 정보 수정 기능
+    - **📡 관리자 페이지**: 콘텐츠 및 사용자 관리 기능
+    
+    ### 🛠 기술 스택
+    #### Frontend
+    - Next.js 15
+    - TypeScript
+    - TailwindCSS
+    - next-intl (다국어 지원)
+    - React Query v5 (데이터 페칭)
+    
+    #### Backend
+    - Next.js API Routes
+    - Prisma ORM (MongoDB)
+    - Next-Auth v5 (인증)
+    - NodeMailer (이메일 발송)
+    
+    #### DevOps
+    - Vercel (배포 및 CI/CD)
+    
+    ---
+    
+    ## 📁 프로젝트 구조
+    \`\`\`
+    📁 westloke/ 
+    ├─ 📁 actions/ # 서버 액션
+    ├─ 📁 app/ # App Router 라우트
+    ├─ 📁 components/ # UI 컴포넌트
+    ├─ 📁 config/ # 환경설정
+    ├─ 📁 constant/ # 상수 정의
+    ├─ 📁 data/ # 데이터 파일
+    ├─ 📁 hooks/ # 커스텀 훅
+    ├─ 📁 i18n/ # 다국어 설정
+    ├─ 📁 interface/ # 인터페이스 정의
+    ├─ 📁 lib/ # 라이브러리
+    ├─ 📁 message/ # 다국어 메시지
+    ├─ 📁 prisma/ # Prisma ORM 설정
+    ├─ 📁 public/ # 정적 파일
+    ├─ 📁 services/ # API 서비스 로직
+    ├─ 📁 styles/ # 스타일 파일
+    ├─ 📁 types/ # 타입 정의
+    └─ 📁 utils/ # 유틸리티 함수
+    \`\`\`
+    
+    ---
+    
+    ## 🏆 결과
+    - ✅ Next.js 15와 최신 기술을 적용한 마이그레이션 성공.
+    - ✅ 다국어 지원을 통한 글로벌 서비스 확장.
+    - ✅ Next-Auth v5를 활용한 소셜 로그인 및 이메일 로그인 구현.
+    - ✅ 관리자 페이지 추가로 서비스 관리 효율성 증가.
+    - ✅ Vercel을 활용한 CI/CD 구축 및 배포 자동화.
+    
+    ---
+    
+    ## 📞 연락처
+    - 📧 Email: kimkuns98@gmail.com
+    - 💻 GitHub: https://github.com/kimkuns91
+    - 📝 Blog: https://velog.io/@kimkuns
+    `,
+    github_url: 'https://github.com/kimkuns91/WestLoke',
+  },
 } as const;
 
 // 정렬 함수
