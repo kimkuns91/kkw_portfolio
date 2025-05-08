@@ -90,7 +90,17 @@
     min-width: 200px;
     margin: 0 auto;
   }
+  .markdown-body img {
+    width: 100%;
+    height: auto;
+  }
 
+  .markdown-body table img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
   @media (prefers-color-scheme: dark) {
     .markdown-body {
       color-scheme: dark;

@@ -784,7 +784,7 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
     url_slug: 'westloke_v2',
     description:
       'Next.js 15 App Router 기반으로 마이그레이션하고 다국어 기능과 관리자 페이지를 추가한 프로젝트입니다.',
-    link: 'https://westloke-rho.vercel.app/',
+    link: 'https://www.westloke.com/',
     thumbnail: [
       '/projects/westloke_v2/westloke_01.png',
       '/projects/westloke_v2/westloke_02.png',
@@ -892,6 +892,235 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
     - 📝 Blog: https://velog.io/@kimkuns
     `,
     github_url: 'https://github.com/kimkuns91/WestLoke',
+  },
+  QuizNote: {
+    id: 16,
+    title: 'QuizNote (NIPA-Google ML 부트캠프 팀 프로젝트)',
+    url_slug: 'quiznote',
+    description:
+      'QuizNote는 AI 기반의 스마트 학습 플랫폼입니다. 강의 녹음 파일 또는 유튜브 강의 URL을 업로드하면, AI가 음성을 텍스트로 변환하고 그 내용을 분석하여 자동으로 강의 요약 노트와 퀴즈를 생성해줍니다.',
+    link: 'https://www.quiznote.co.kr/',
+    thumbnail: [
+      '/projects/quiznote/PPT_00.png',
+      '/projects/quiznote/PPT_01.png',
+      '/projects/quiznote/quiznote_01.png',
+      '/projects/quiznote/quiznote_02.png',
+      '/projects/quiznote/quiznote_03.png',
+      '/projects/quiznote/quiznote_04.png',
+      '/projects/quiznote/quiznote_05.png',
+    ],
+    created_at: '2025-04 - 2025-04',
+    stack: [
+      'Next.js 15',
+      'TypeScript',
+      'Tailwind CSS',
+      'next-intl',
+      'Prisma ORM',
+      'Supabase',
+      'Next-Auth v5',
+      'Tanstack Query',
+      'FastAPI',
+      'Redis',
+      'Celery',
+      'Docker',
+      'AWS',
+    ],
+    content: `# 📘 QuizNote
+    
+## 2025년 4월 7일 ~ 2025년 4월 25일 동안 진행된 NIPA-Google ML 부트캠프 실무 프로젝트 결과물입니다.
+---
+![QuizNote 로고](/projects/quiznote/PPT_00.png)
+![QuizNote 개요](/projects/quiznote/PPT_01.png)
+
+---
+## 🌐 사이트
+https://quiz-note-frontend.vercel.app/
+
+## 📌 프로젝트 소개
+
+**QuizNote**는 AI 기반의 스마트 학습 플랫폼입니다.  
+강의 **녹음 파일** 또는 **유튜브 강의 URL**을 업로드하면, AI가 **음성을 텍스트로 변환**하고  
+그 내용을 분석하여 **자동으로 강의 요약 노트와 퀴즈**를 생성해줍니다.
+
+---
+
+## 👥 팀원 소개
+
+| ![김건우](https://github.com/kimkuns91.png) | ![백상윤](https://github.com/saharapaik.png) | ![이하은](https://github.com/HACore.png) |
+|:--:|:--:|:--:|
+| **김건우** | **백상윤** | **이하은** |
+| [GitHub](https://github.com/kimkuns91) | [GitHub](https://github.com/saharapaik) | [GitHub](https://github.com/HACore) |
+---
+
+## 🚀 프로젝트 구조
+
+### 📦 Backend (FastAPI)
+\`\`\`
+📦 backend/
+┣ 📂 app/                    # 메인 애플리케이션 디렉토리
+┃ ┣ 📂 routers/             # API 라우터 정의
+┃ ┃ ┣ 📄 media.py          # 미디어 파일 처리 라우터
+┃ ┃ ┣ 📄 summarization.py  # 요약 관련 라우터
+┃ ┃ ┣ 📄 transcription.py  # 음성-텍스트 변환 라우터
+┃ ┃
+┃ ┣ 📂 services/           # 비즈니스 로직 서비스
+┃ ┃ ┣ 📄 celery_config.py # Celery 설정
+┃ ┃ ┣ 📄 openai_service.py # OpenAI API 연동
+┃ ┃ ┣ 📄 prompt_template.py # 프롬프트 템플릿
+┃ ┃ ┣ 📄 summarize_prompt.py # 요약 프롬프트
+┃ ┃ ┣ 📄 summarize_service.py # 요약 서비스
+┃ ┃ ┣ 📄 tasks.py         # 비동기 작업 정의
+┃ ┃ ┗ 📄 whisper_service.py # Whisper AI 서비스
+┃ ┃
+┃ ┣ 📄 __init__.py        # 패키지 초기화
+┃ ┣ 📄 config.py          # 환경 설정
+┃ ┣ 📄 database.py        # 데이터베이스 설정
+┃ ┣ 📄 main.py           # 애플리케이션 진입점
+┃ ┗ 📄 models.py         # 데이터 모델 정의
+\`\`\`
+
+### 📦 Frontend (Next.js)
+\`\`\`
+📦 frontend/
+┣ 📂 prisma/              # Prisma ORM 설정
+┣ 📂 public/             # 정적 파일
+┣ 📂 src/                # 소스 코드
+┃ ┣ 📂 actions/         # 서버 액션
+┃ ┣ 📂 app/            # Next.js App Router
+┃ ┣ 📂 components/     # React 컴포넌트
+┃ ┣ 📂 config/         # 환경 설정
+┃ ┣ 📂 constants/      # 상수 정의
+┃ ┣ 📂 hooks/          # 커스텀 훅
+┃ ┣ 📂 i18n/          # 국제화 설정
+┃ ┣ 📂 lib/           # 유틸리티 함수
+┃ ┣ 📂 messages/      # 다국어 메시지
+┃ ┣ 📂 services/      # API 서비스
+┃ ┣ 📂 store/         # 상태 관리
+┃ ┗ 📂 styles/        # 스타일 정의
+\`\`\`
+
+---
+
+## ⚙️ 기술 스택
+
+### 🔷 Frontend
+| 기술 | 설명 |
+|:--|:--|
+| **Next.js 15** | 서버 사이드 렌더링 프레임워크 |
+| **React 19** | 최신 UI 컴포넌트 라이브러리 |
+| **TypeScript** | 정적 타입을 지원하는 자바스크립트 슈퍼셋 |
+| **Tailwind CSS 4** | 유틸리티 기반 CSS 프레임워크 |
+| **TanStack Query** | 서버 상태 관리 (React Query) |
+| **NextAuth.js 5** | 인증 시스템 |
+| **Prisma 6** | 타입 안전한 ORM |
+| **next-intl** | 국제화(i18n) 지원 |
+
+### 🟦 Backend
+| 기술 | 설명 |
+|:--|:--|
+| **FastAPI** | 고성능 Python API 서버 |
+| **SQLAlchemy** | 데이터베이스 ORM |
+| **Whisper AI** | OpenAI의 음성 인식 모델 |
+| **OpenAI API** | 요약 및 퀴즈 생성 |
+| **LLaMA 3** | 한국어 특화 모델 (MLP-KTLim/llama-3-Korean-Bllossom-8B) |
+| **AWS S3** | 미디어 파일 저장소 |
+| **PyTorch** | 딥러닝 프레임워크 |
+| **Redis + Celery** | 비동기 작업 처리 |
+
+### 💻 Infra
+| 기술 | 설명 |
+|:--|:--|
+| **Docker** | 컨테이너 기반 가상화 |
+| **KakaoCloud** | 클라우드 인프라 |
+| **GPU 인스턴스** | gn1i.2xlarge (NVIDIA GPU) |
+| **운영체제** | Ubuntu 20.04 LTS |
+
+---
+
+## 🚀 시작하기
+
+### 📥 설치 및 실행
+
+#### 1. 저장소 클론
+\`\`\`bash
+git clone [repository-url]
+cd quiznote
+\`\`\`
+
+#### 2. 환경 변수 설정
+\`\`\`bash
+# 프론트엔드
+cp frontend/.env.example frontend/.env
+
+# 백엔드
+cp backend/.env.example backend/.env
+\`\`\`
+
+### ⚙️ 개발 환경 실행
+
+#### ▶ 프론트엔드 실행
+\`\`\`bash
+# 프론트엔드 디렉토리로 이동
+cd frontend
+
+# 의존성 설치
+yarn install
+
+# Prisma 클라이언트 생성
+npx prisma generate
+
+# 개발 서버 실행
+yarn dev
+\`\`\`
+
+#### ▶ 백엔드 실행
+\`\`\`bash
+# 백엔드 디렉토리로 이동
+cd backend
+
+# Python 가상환경 생성 및 활성화
+python -m venv venv
+source venv/bin/activate  # Windows: .\\venv\\Scripts\\activate
+
+# 의존성 설치
+pip install -r requirements.txt
+
+# 개발 서버 실행
+uvicorn app.main:app --reload
+\`\`\`
+
+#### ▶ Docker Compose로 전체 실행
+\`\`\`bash
+# 프로젝트 루트 디렉토리에서
+docker-compose up -d
+\`\`\`
+
+
+## 🧠 주요 기능
+- **강의 업로드**
+  - 로컬 녹음 파일 업로드
+  - 다양한 형식의 미디어 파일 지원
+
+- **AI 기반 학습 지원**
+  - 음성-텍스트 변환 (STT)
+  - 다국어 자동 감지 및 변환
+  - 강의 내용 자동 요약
+  - 핵심 개념 추출
+  - 맞춤형 퀴즈 생성
+
+- **학습 관리**
+  - 학습 이력 관리
+  - 퀴즈 결과 분석
+  - 학습 진도 추적
+
+- **커뮤니티**
+  - 학습 노트 공유
+  - 퀴즈 공유 및 풀기
+
+## 📄 라이센스
+이 프로젝트는 MIT 라이센스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+    `,
+    github_url: 'https://github.com/Google-ML-Bootcamp/team-project',
   },
 } as const;
 

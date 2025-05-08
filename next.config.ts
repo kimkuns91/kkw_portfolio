@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: 'velog.velcdn.com',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        pathname: '/**',
+      },
     ],
   },
   headers: async () => [
