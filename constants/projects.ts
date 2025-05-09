@@ -551,7 +551,7 @@ HG 엔터테인먼트는 웹툰 기반 드라마 콘텐츠를 제공하기 위�
       'MongoDB',
       'next-auth',
       'Python',
-      'Flask',
+      'FastAPI',
       'Nodemailer',
       'react-to-pdf',
     ],
@@ -575,7 +575,7 @@ Next.js 14를 사용하여 웹사이트를 구축하였으며, Python을 활용�
 - **💡 회원 인증**: Next-Auth를 사용하여 카카오톡 및 구글 로그인을 지원.
 - **📊 데이터 관리**: MongoDB를 이용하여 확장성을 고려한 데이터베이스 구성.
 - **📡 API 구현**: Next.js API Routes를 통해 회원 인증 및 데이터 처리를 구현.
-- **🔍 데이터 분석**: Python (Flask)을 활용하여 데이터 분석 및 처리 로직 구현.
+- **🔍 데이터 분석**: Python (FastAPI)을 활용하여 데이터 분석 및 처리 로직 구현.
 - **📧 결과 전송 및 PDF 저장**:
   - Nodemailer를 사용하여 이메일로 분석 결과 전송.
   - react-to-pdf를 통해 A4 크기로 최적화된 PDF 파일로 결과 저장.
