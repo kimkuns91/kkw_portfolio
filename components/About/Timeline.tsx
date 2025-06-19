@@ -43,6 +43,12 @@ const Timeline: React.FC = () => (
   <div className="max-w-4xl mx-auto divide-zinc-800 relative">
     <div className="absolute h-full w-[4px] bg-gradient-to-b from-transparent via-accent to-transparent -left-4 md:-left-10"></div>
     <TimelineItem
+      year="2025"
+      events={[
+        'NIPA-Google ML 부트캠프 최우수 수료',
+      ]}
+    />
+    <TimelineItem
       year="2024"
       events={[
         '대학교와의 협업을 통해 학습 모델 시스템의 MVP를 설계 및 구현, 데이터 기반 학습 솔루션 제공.',
@@ -59,7 +65,7 @@ const Timeline: React.FC = () => (
     <TimelineItem
       year="2022"
       events={[
-        '린케어 주식회사 프로젝트 매니저 재직',
+        '린케어 주식회사 개발팀 팀장 재직',
         'ADsP - 데이터분석 준전문가 자격증 취득 (한국데이터산업진흥원)',
       ]}
     />
