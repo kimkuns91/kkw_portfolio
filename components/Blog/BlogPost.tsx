@@ -3,35 +3,73 @@
 import { IBlogPost } from '@/types/blog';
 import Image from 'next/image';
 import Link from 'next/link';
+import { VELOG_USERNAME } from '@/constants/blog';
 
-interface BlogPostProps {
+interface IBlogPostProps {
   post: IBlogPost;
 }
 
-export default function BlogPost({ post }: BlogPostProps) {
+/**
+ * BlogPost 컴포넌트
+ *
+ * @description
+ * 개별 블로그 게시글을 카드 형태로 표시하는 컴포넌트
+ *
+ * @param post - 블로그 게시글 데이터
+ *
+ * @features
+ * - 썸네일 이미지 표시
+ * - 제목 및 요약 표시
+ * - 첫 번째 태그 표시
+ * - Velog 게시글로 직접 링크
+ */
+export default function BlogPost({ post }: IBlogPostProps) {
+  const velogUrl = `https://velog.io/@${VELOG_USERNAME}/${post.url_slug}`;
+
   return (
-    <Link href={`https://velog.io/@kimkuns/${post.url_slug}`}>
-      <div className="flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:opacity-80 hover:ml-4 transition-all duration-300">
+    <Link
+      href={velogUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block"
+    >
+      <article className="flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:opacity-80 hover:ml-4 transition-all duration-300">
+        {/* 썸네일 이미지 */}
         <div className="relative w-full md:w-[30%] h-[200px] md:h-[180px] rounded-xl overflow-hidden">
           <Image
             src={post.thumbnail || '/images/default-blog-thumbnail.jpg'}
-            alt={post.title}
+            alt={`${post.title} 썸네일`}
             fill
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 30vw"
             className="object-cover"
           />
         </div>
+
+        {/* 게시글 정보 */}
         <div className="flex-1 py-4 md:py-0 md:pl-6">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm text-neutral">{post.tags[0]}</span>
-          </div>
+          {/* 태그 */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm text-neutral px-2 py-1 bg-accent/20 rounded">
+                {post.tags[0]}
+              </span>
+            </div>
+          )}
+
+          {/* 제목 */}
           <h2 className="text-neutral-light text-lg md:text-xl font-bold mb-2 line-clamp-2">
             {post.title}
           </h2>
-          <p className="text-neutral-dark text-sm md:text-base mb-4 line-clamp-2">
-            {post.short_description}
-          </p>
+
+          {/* 요약 */}
+          {post.short_description && (
+            <p className="text-neutral-dark text-sm md:text-base mb-4 line-clamp-2">
+              {post.short_description}
+            </p>
+          )}
         </div>
-      </div>
+      </article>
     </Link>
   );
 }

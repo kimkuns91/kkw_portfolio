@@ -1136,3 +1136,17 @@ export const PROJECT_LIST = sortProjects(
 
 // 특정 프로젝트 찾기 예시:
 // const tkTradeProject = Projects.TK_TRADE;
+
+/**
+ * Projects 페이지 UI 상수
+ */
+export const PROJECTS_PAGE_TEXT = {
+  title: 'Projects',
+  searchPlaceholder: '프로젝트 검색...',
+  noResults: '검색 결과가 없습니다.',
+} as const;
+
+/**
+ * 프로젝트 기본 썸네일 이미지
+ */
+export const DEFAULT_PROJECT_THUMBNAIL = '/images/default-project-thumbnail.jpg' as const;

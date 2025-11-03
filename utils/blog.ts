@@ -1,12 +1,31 @@
-export async function fetchBlogPosts(pageParam: string = '') {
+import { BLOG_API_CONFIG, VELOG_USERNAME } from '@/constants/blog';
+
+import { IBlogPost } from '@/types/blog';
+
+/**
+ * Velog API를 통해 블로그 게시글을 가져오는 함수
+ *
+ * @param pageParam - 페이지네이션을 위한 커서 (게시글 ID)
+ * @returns 블로그 게시글 배열
+ *
+ * @description
+ * Velog GraphQL API를 호출하여 사용자의 게시글 목록을 가져옵니다.
+ * React Query의 useInfiniteQuery와 함께 사용됩니다.
+ */
+export async function fetchBlogPosts(
+  pageParam: string = ''
+): Promise<IBlogPost[]> {
   const response = await fetch('/api/blog', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
-      operationName: 'Posts',
+      operationName: BLOG_API_CONFIG.operationName,
       variables: {
-        username: 'kimkuns',
+        username: VELOG_USERNAME,
         cursor: pageParam,
-        limit: 10,
+        limit: BLOG_API_CONFIG.postsPerPage,
       },
       query: `
         query Posts($cursor: ID, $username: String, $temp_only: Boolean, $tag: String, $limit: Int) {
@@ -36,6 +55,15 @@ export async function fetchBlogPosts(pageParam: string = '') {
     }),
   });
 
+  if (!response.ok) {
+    throw new Error('Failed to fetch blog posts');
+  }
+
   const { data } = await response.json();
+  
+  if (!data || !data.posts) {
+    throw new Error('Invalid response from blog API');
+  }
+
   return data.posts;
 } 

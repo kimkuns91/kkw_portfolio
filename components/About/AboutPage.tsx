@@ -1,5 +1,6 @@
 'use client';
 
+import { ABOUT_INTRODUCTION } from '@/constants/about';
 import AnimatedImages from './AnimatedImages';
 import MotionScrollSection from '../MotionSection';
 import Skills from '../Home/Skills';
@@ -8,9 +9,22 @@ import Timeline from './Timeline';
 import { motion } from 'framer-motion';
 import { slideInFromLeft } from '@/utils/motions';
 
+/**
+ * AboutPage 컴포넌트
+ *
+ * @description
+ * 개발자 소개, 기술 스택, 경력 타임라인을 표시하는 메인 About 페이지
+ *
+ * @sections
+ * - Introduction: 인사말 및 소개 텍스트 (애니메이션 효과)
+ * - AnimatedImages: 프로필 이미지 슬라이더
+ * - Skills: 기술 스택 섹션 (Home과 동일한 컴포넌트 재사용)
+ * - Timeline: 경력 및 학습 이력 타임라인
+ */
 const AboutPage: React.FC = () => {
   return (
     <MotionScrollSection>
+      {/* Introduction Section */}
       <motion.div
         initial="hidden"
         animate="visible"
@@ -45,24 +59,18 @@ const AboutPage: React.FC = () => {
             variants={slideInFromLeft(2.0)}
             className="font-bold text-2xl md:text-4xl md:leading-tight text-zinc-50 max-w-4xl"
           >
-            <TextGenerateEffect
-              words={`저는 끊임없이 도전하고 배우는 개발자입니다. 새로운 기술을 익히고
-            프로젝트에 적용하는 과정을 즐기며, 웹과 모바일 환경에서 사용자
-            경험을 혁신하는 데 집중하고 있습니다. 단순한 코딩을 넘어, 사용자
-            중심의 솔루션을 설계하고 개선하기 위해 프로젝트의 요구사항을 깊이
-            분석하고 체계적으로 접근하는 것을 중요하게 생각합니다. 최신 기술에
-            대한 학습과 실무 적용을 반복하며, 복잡한 기술적 문제를 창의적으로
-            해결하는 데 열정을 가지고 있습니다. 변화하는 기술 트렌드에 민감하게
-            대응하며, 기술을 통해 더 나은 사용자 경험과 가치를 제공하기 위해
-            끊임없이 성장하고 있습니다.`}
-            />
+            <TextGenerateEffect words={ABOUT_INTRODUCTION} />
           </motion.div>
         </div>
         <div className="flex-1 order-first md:order-last relative">
           <AnimatedImages />
         </div>
       </motion.div>
+
+      {/* Skills Section */}
       <Skills />
+
+      {/* Timeline Section */}
       <motion.div
         initial="hidden"
         animate="visible"

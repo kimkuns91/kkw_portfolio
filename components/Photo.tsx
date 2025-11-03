@@ -3,6 +3,17 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+/**
+ * Photo 컴포넌트
+ *
+ * @description
+ * 메인 프로필 이미지를 표시하는 컴포넌트
+ *
+ * @performance
+ * - priority 속성으로 LCP 최적화
+ * - 애니메이션 delay 최소화 (0.2초)
+ * - 명시적 크기 설정으로 CLS 방지
+ */
 const Photo = () => {
   return (
     <div className="w-full h-full relative">
@@ -10,7 +21,7 @@ const Photo = () => {
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          transition: { delay: 1, duration: 0.4, ease: 'easeIn' },
+          transition: { delay: 0.1, duration: 0.3, ease: 'easeIn' },
         }}
       >
         {/* image */}
@@ -18,17 +29,19 @@ const Photo = () => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transition: { delay: 1.2, duration: 0.4, ease: 'easeInOut' },
+            transition: { delay: 0.2, duration: 0.3, ease: 'easeInOut' },
           }}
           className="w-[298px] h-[298px] xl:w-[490px] xl:h-[490px] mix-blend-lighten absolute"
         >
           <Image
             src="/images/photo_v2.png"
             priority
-            quality={100}
-            fill
-            alt="my photo"
+            quality={90}
+            width={490}
+            height={490}
+            alt="김건우 프로필 사진"
             className="object-contain order-1"
+            sizes="(max-width: 1280px) 298px, 490px"
           />
         </motion.div>
         {/* circle */}

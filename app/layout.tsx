@@ -1,10 +1,11 @@
 import '@/styles/globals.css';
 
-import type { Metadata, Viewport } from 'next';
 import { NextLayout, NextProvider } from './providers';
 
 import { JetBrains_Mono } from 'next/font/google';
+import type { Viewport } from 'next';
 import { cn } from '@/lib/utils';
+import { rootMetadata } from './layout.metadata';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -15,97 +16,49 @@ const jetbrainsMono = JetBrains_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5, // Accessibility: 최소 5배 확대 허용
+  userScalable: true, // Accessibility: 사용자 확대/축소 허용
   themeColor: '#18181B',
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://portfolio.whitemouse.dev'),
-  title: {
-    default: '김건우 포트폴리오 | Fullstack Developer',
-    template: '%s | 김건우 포트폴리오',
-  },
-  description: '끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.',
-  generator: 'Next.js',
-  applicationName: '김건우 포트폴리오',
-  referrer: 'origin-when-cross-origin',
-  keywords: [
-    'Fullstack',
-    'Frontend',
-    'Backend',
-    'Developer',
-    '개발자',
-    '포트폴리오',
-    '김건우',
-    '백엔드',
-    '프론트엔드',
-    'React',
-    'Next.js',
-    'TypeScript',
-    '웹개발',
-    '린케어',
-    '린케어 주식회사',
-  ],
-  authors: [{ name: '김건우' }],
-  creator: '김건우',
-  publisher: '김건우',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-96x96.png',
-    apple: '/apple-touch-icon.png',
-  },
-  manifest: '/site.webmanifest',
-  openGraph: {
-    type: 'website',
-    locale: 'ko_KR',
-    url: 'https://portfolio.whitemouse.dev',
-    title: '김건우 포트폴리오 | Fullstack Developer',
-    description: '끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.',
-    siteName: '김건우 포트폴리오',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: '김건우 포트폴리오',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '김건우 포트폴리오 | Fullstack Developer',
-    description: '끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.',
-    images: ['/og-image.png'],
-    creator: '@your_twitter_handle',
-  },
-};
+export const metadata = rootMetadata;
 
+/**
+ * RootLayout 컴포넌트
+ *
+ * @description
+ * 애플리케이션의 최상위 레이아웃 컴포넌트
+ *
+ * @features
+ * - JetBrains Mono 폰트 적용
+ * - 전역 스타일 적용
+ * - 메타데이터 설정
+ * - 중요 이미지 preload (성능 최적화)
+ * - Provider 래핑 (React Query, Recoil, Toast)
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
+      <head>
+        {/* 메인 프로필 이미지 preload */}
+        <link
+          rel="preload"
+          href="/images/photo_v2.png"
+          as="image"
+          type="image/png"
+        />
+        {/* OG 이미지 preload */}
+        <link
+          rel="preload"
+          href="/og-image.png"
+          as="image"
+          type="image/png"
+        />
+      </head>
       <body className={cn('scrollbar', jetbrainsMono.variable)}>
         <NextProvider>
           <NextLayout>{children}</NextLayout>

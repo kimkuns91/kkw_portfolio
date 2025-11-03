@@ -1,3 +1,13 @@
+'use client';
+
+import {
+  EMAIL_REGEX,
+  FORM_LABELS,
+  FORM_PLACEHOLDERS,
+  FORM_VALIDATION_MESSAGES,
+  SERVICE_OPTIONS,
+  TOAST_MESSAGES,
+} from '@/constants/contact';
 import {
   Select,
   SelectContent,
@@ -9,8 +19,8 @@ import {
 } from '@/components/ui/select';
 
 import { Button } from '../ui/button';
-import { ContactFormType } from '@/interface';
 import Grid from './Grid';
+import { IContactForm } from '@/types/contact';
 import { Input } from '../ui/input';
 import Spinner from '../Spinner';
 import { Textarea } from '../ui/textarea';
@@ -18,36 +28,43 @@ import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-const initialContactFormState: ContactFormType = {
-  name: '',
-  email: '',
-  phone: '',
-  service: '',
-  message: '',
-};
-
+/**
+ * ContactForm 컴포넌트
+ *
+ * @description
+ * 문의 폼을 표시하고 이메일 전송을 처리하는 컴포넌트
+ *
+ * @features
+ * - React Hook Form으로 폼 상태 관리
+ * - 유효성 검사 (이름, 이메일, 메시지 필수)
+ * - 이메일 형식 검증
+ * - 전송 상태 표시
+ * - 성공/실패 토스트 메시지
+ */
 export const ContactForm = () => {
-  const [disableSubmit, setDisableSubmit] = useState<boolean>(false);
-  const [formData, setFormData] = useState<ContactFormType>(
-    initialContactFormState
-  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
-  } = useForm<ContactFormType>({
-    defaultValues: formData,
+    setValue,
+    watch,
+  } = useForm<IContactForm>({
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      service: '',
+      message: '',
+    },
   });
 
-  const onSubmit = async (data: ContactFormType) => {
-    if (data.name === '' || data.email === '' || data.message === '') {
-      toast.error('필수 항목들을 모두 입력해주세요.');
-      return;
-    }
+  const serviceValue = watch('service');
 
-    setDisableSubmit(true);
+  const onSubmit = async (data: IContactForm) => {
+    setIsSubmitting(true);
 
     try {
       const response = await fetch('/api/contact', {
@@ -58,36 +75,18 @@ export const ContactForm = () => {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        toast.success('이메일 전송에 성공했습니다.');
-        setFormData(initialContactFormState);
-        reset(initialContactFormState);
-      } else {
-        throw new Error('이메일 전송에 실패했습니다.');
+      if (!response.ok) {
+        throw new Error('Failed to send email');
       }
+
+      toast.success(TOAST_MESSAGES.success);
+      reset();
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast.error('이메일 전송에 실패했습니다.');
+      toast.error(TOAST_MESSAGES.error);
     } finally {
-      setDisableSubmit(false);
+      setIsSubmitting(false);
     }
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    field: keyof ContactFormType
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: e.target.value,
-    }));
-  };
-
-  const handleServiceChange = (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      service: value,
-    }));
   };
 
   return (
@@ -96,25 +95,29 @@ export const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Grid size={20} />
+
       {/* Name Field */}
       <div className="relative z-20 w-full">
         <label
           className="pl-1 mb-4 inline-block text-sm font-medium text-neutral-light"
           htmlFor="name"
         >
-          성함 <span className="text-error">*</span>
+          {FORM_LABELS.name} <span className="text-error">*</span>
         </label>
         <Input
           id="name"
           type="text"
-          placeholder="홍길동"
+          placeholder={FORM_PLACEHOLDERS.name}
           className="w-full"
-          {...register('name', { required: true })}
-          value={formData.name}
-          onChange={(e) => handleInputChange(e, 'name')}
+          {...register('name', {
+            required: FORM_VALIDATION_MESSAGES.nameRequired,
+          })}
+          aria-invalid={errors.name ? 'true' : 'false'}
         />
         {errors.name && (
-          <span className="text-red-600 text-sm">필수 항목입니다.</span>
+          <span className="text-red-600 text-sm" role="alert">
+            {errors.name.message}
+          </span>
         )}
       </div>
 
@@ -124,30 +127,26 @@ export const ContactForm = () => {
           className="pl-1 mb-4 inline-block text-sm font-medium text-neutral-light"
           htmlFor="email"
         >
-          이메일 <span className="text-error">*</span>
+          {FORM_LABELS.email} <span className="text-error">*</span>
         </label>
         <Input
           id="email"
           type="email"
-          placeholder="email@email.com"
+          placeholder={FORM_PLACEHOLDERS.email}
           className="w-full"
           {...register('email', {
-            required: '이메일은 필수 항목입니다.',
+            required: FORM_VALIDATION_MESSAGES.emailRequired,
             pattern: {
-              value: /^\S+@\S+$/i,
-              message: '올바른 이메일 주소를 입력하세요.',
+              value: EMAIL_REGEX,
+              message: FORM_VALIDATION_MESSAGES.emailInvalid,
             },
           })}
-          value={formData.email}
-          onChange={(e) => handleInputChange(e, 'email')}
+          aria-invalid={errors.email ? 'true' : 'false'}
         />
-        {errors.email && errors.email.type === 'required' && (
-          <div className="text-red-600 text-sm">필수 항목입니다.</div>
-        )}
-        {errors.email && errors.email.type === 'pattern' && (
-          <div className="text-red-600 text-sm">
-            올바른 이메일 주소를 입력하세요.
-          </div>
+        {errors.email && (
+          <span className="text-red-600 text-sm" role="alert">
+            {errors.email.message}
+          </span>
         )}
       </div>
 
@@ -157,16 +156,14 @@ export const ContactForm = () => {
           className="pl-1 mb-4 inline-block text-sm font-medium text-neutral-light"
           htmlFor="phone"
         >
-          전화번호
+          {FORM_LABELS.phone}
         </label>
         <Input
           id="phone"
-          type="text"
-          placeholder="010-1111-2222"
-          {...register('phone')}
-          value={formData.phone}
+          type="tel"
+          placeholder={FORM_PLACEHOLDERS.phone}
           className="w-full"
-          onChange={(e) => handleInputChange(e, 'phone')}
+          {...register('phone')}
         />
       </div>
 
@@ -176,18 +173,23 @@ export const ContactForm = () => {
           className="pl-1 mb-4 inline-block text-sm font-medium text-neutral-light"
           htmlFor="service"
         >
-          서비스
+          {FORM_LABELS.service}
         </label>
-        <Select value={formData.service} onValueChange={handleServiceChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="서비스를 선택해주세요" />
+        <Select
+          value={serviceValue}
+          onValueChange={(value) => setValue('service', value)}
+        >
+          <SelectTrigger className="w-full" id="service">
+            <SelectValue placeholder={FORM_PLACEHOLDERS.service} />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>서비스를 선택해주세요</SelectLabel>
-              <SelectItem value="Web Development">웹 개발</SelectItem>
-              <SelectItem value="UI/UX Design">UI/UX 디자인</SelectItem>
-              <SelectItem value="etc">기타</SelectItem>
+              <SelectLabel>{FORM_PLACEHOLDERS.service}</SelectLabel>
+              {SERVICE_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -199,18 +201,21 @@ export const ContactForm = () => {
           className="pl-1 mb-4 inline-block text-sm font-medium text-neutral-light"
           htmlFor="message"
         >
-          내용 <span className="text-error">*</span>
+          {FORM_LABELS.message} <span className="text-error">*</span>
         </label>
         <Textarea
           id="message"
           className="h-[200px]"
-          placeholder="내용을 입력해주세요."
-          {...register('message', { required: true })}
-          value={formData.message}
-          onChange={(e) => handleInputChange(e, 'message')}
+          placeholder={FORM_PLACEHOLDERS.message}
+          {...register('message', {
+            required: FORM_VALIDATION_MESSAGES.messageRequired,
+          })}
+          aria-invalid={errors.message ? 'true' : 'false'}
         />
         {errors.message && (
-          <span className="text-red-600 text-sm">필수 항목입니다.</span>
+          <span className="text-red-600 text-sm" role="alert">
+            {errors.message.message}
+          </span>
         )}
       </div>
 
@@ -219,9 +224,10 @@ export const ContactForm = () => {
         size="md"
         className="w-full hover:bg-accent-hover"
         type="submit"
-        disabled={isSubmitting || disableSubmit}
+        disabled={isSubmitting}
+        aria-busy={isSubmitting}
       >
-        {!disableSubmit ? '보내기' : <Spinner />}
+        {isSubmitting ? <Spinner /> : FORM_LABELS.submit}
       </Button>
     </form>
   );
