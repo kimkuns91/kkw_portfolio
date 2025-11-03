@@ -1,9 +1,11 @@
 'use client';
 
+import { BLOG_DEFAULT_THUMBNAIL, VELOG_USERNAME } from '@/constants/blog';
+
 import { IBlogPost } from '@/types/blog';
 import Image from 'next/image';
 import Link from 'next/link';
-import { VELOG_USERNAME } from '@/constants/blog';
+import { useState } from 'react';
 
 interface IBlogPostProps {
   post: IBlogPost;
@@ -22,9 +24,21 @@ interface IBlogPostProps {
  * - 제목 및 요약 표시
  * - 첫 번째 태그 표시
  * - Velog 게시글로 직접 링크
+ * - 이미지 로딩 실패 시 og-image.png 대체
+ *
+ * @performance
+ * - lazy loading으로 스크롤 시 이미지 로드
+ * - onError 핸들러로 실패한 이미지 대체
+ * - 그라데이션 배경으로 로딩 중 시각적 개선
  */
 export default function BlogPost({ post }: IBlogPostProps) {
   const velogUrl = `https://velog.io/@${VELOG_USERNAME}/${post.url_slug}`;
+  const [imageError, setImageError] = useState(false);
+
+  // 썸네일 이미지 결정 (우선순위: post.thumbnail → BLOG_DEFAULT_THUMBNAIL)
+  const thumbnailSrc = imageError || !post.thumbnail 
+    ? BLOG_DEFAULT_THUMBNAIL 
+    : post.thumbnail;
 
   return (
     <Link
@@ -35,14 +49,15 @@ export default function BlogPost({ post }: IBlogPostProps) {
     >
       <article className="flex flex-col md:flex-row rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:opacity-80 hover:ml-4 transition-all duration-300">
         {/* 썸네일 이미지 */}
-        <div className="relative w-full md:w-[30%] h-[200px] md:h-[180px] rounded-xl overflow-hidden">
+        <div className="relative w-full md:w-[30%] h-[200px] md:h-[180px] rounded-xl overflow-hidden bg-gradient-to-br from-primary to-secondary">
           <Image
-            src={post.thumbnail || '/images/default-blog-thumbnail.jpg'}
+            src={thumbnailSrc}
             alt={`${post.title} 썸네일`}
             fill
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 30vw"
             className="object-cover"
+            onError={() => setImageError(true)}
           />
         </div>
 

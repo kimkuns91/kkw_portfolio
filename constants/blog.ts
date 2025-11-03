@@ -5,6 +5,9 @@
 // Velog 사용자명
 export const VELOG_USERNAME = 'kimkuns';
 
+// 블로그 기본 이미지
+export const BLOG_DEFAULT_THUMBNAIL = '/og-image.png';
+
 // 블로그 API 설정
 export const BLOG_API_CONFIG = {
   postsPerPage: 10,
