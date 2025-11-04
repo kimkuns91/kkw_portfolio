@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { Analytics } from '@vercel/analytics/next';
 import Background from '@/components/Home/Background';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
@@ -90,11 +91,16 @@ export const NextProvider = ({ children }: IProviderProps) => {
  * - Background: 3D 별 배경 (StarsCanvas)
  * - ModalComponent: 프로젝트 상세 모달
  * - Footer: 하단 푸터
- * - SpeedInsights: Vercel 성능 모니터링
+ * - SpeedInsights: Vercel 성능 모니터링 (Core Web Vitals)
+ * - Analytics: Vercel 사용자 행동 추적 (페이지뷰, 이벤트)
  *
  * @performance
  * - Background는 dynamic import로 SSR 비활성화
  * - SpeedInsights는 레이아웃 레벨에서 한 번만 로드
+ *
+ * @monitoring
+ * - SpeedInsights: LCP, FCP, CLS, TTFB 등 성능 메트릭
+ * - Analytics: 페이지뷰, 체류시간, 이벤트 추적
  */
 export const NextLayout = ({ children }: IProviderProps) => {
   return (
@@ -106,6 +112,7 @@ export const NextLayout = ({ children }: IProviderProps) => {
       <ModalComponent />
       <Footer />
       <SpeedInsights />
+      <Analytics />
     </div>
   );
 };

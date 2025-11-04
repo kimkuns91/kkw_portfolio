@@ -16,6 +16,7 @@
         "@react-three/fiber": "9.0.0-alpha.8",
         "@tabler/icons-react": "^3.26.0",
         "@tanstack/react-query": "^5.62.16",
+        "@vercel/analytics": "^1.5.0",
         "@vercel/speed-insights": "^1.1.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
