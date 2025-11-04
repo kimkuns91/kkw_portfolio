@@ -113,7 +113,7 @@ export const HERO_TEXT = {
  */
 export const LOGO_TEXT = {
   main: 'WhiteMouse',
-  suffix: '.Dev',
+  suffix: 'Dev',
 } as const;
 
 /**
