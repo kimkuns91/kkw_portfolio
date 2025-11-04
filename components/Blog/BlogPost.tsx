@@ -9,6 +9,8 @@ import { useState } from 'react';
 
 interface IBlogPostProps {
   post: IBlogPost;
+  isFirstPage?: boolean;
+  postIndex?: number;
 }
 
 /**
@@ -18,6 +20,8 @@ interface IBlogPostProps {
  * 개별 블로그 게시글을 카드 형태로 표시하는 컴포넌트
  *
  * @param post - 블로그 게시글 데이터
+ * @param isFirstPage - 첫 페이지 여부 (무한 스크롤)
+ * @param postIndex - 페이지 내 게시물 인덱스
  *
  * @features
  * - 썸네일 이미지 표시
@@ -27,11 +31,12 @@ interface IBlogPostProps {
  * - 이미지 로딩 실패 시 og-image.png 대체
  *
  * @performance
- * - lazy loading으로 스크롤 시 이미지 로드
+ * - 첫 페이지 상위 6개: eager loading (즉시 표시)
+ * - 나머지: lazy loading (스크롤 시 로드)
  * - onError 핸들러로 실패한 이미지 대체
  * - 그라데이션 배경으로 로딩 중 시각적 개선
  */
-export default function BlogPost({ post }: IBlogPostProps) {
+export default function BlogPost({ post, isFirstPage = false, postIndex = 0 }: IBlogPostProps) {
   const velogUrl = `https://velog.io/@${VELOG_USERNAME}/${post.url_slug}`;
   const [imageError, setImageError] = useState(false);
 
@@ -39,6 +44,10 @@ export default function BlogPost({ post }: IBlogPostProps) {
   const thumbnailSrc = imageError || !post.thumbnail 
     ? BLOG_DEFAULT_THUMBNAIL 
     : post.thumbnail;
+
+  // 이미지 로딩 전략 결정
+  // 첫 페이지의 상위 6개 게시물만 eager loading
+  const shouldEagerLoad = isFirstPage && postIndex < 6;
 
   return (
     <Link
@@ -54,7 +63,7 @@ export default function BlogPost({ post }: IBlogPostProps) {
             src={thumbnailSrc}
             alt={`${post.title} 썸네일`}
             fill
-            loading="lazy"
+            loading={shouldEagerLoad ? 'eager' : 'lazy'}
             sizes="(max-width: 768px) 100vw, 30vw"
             className="object-cover"
             onError={() => setImageError(true)}

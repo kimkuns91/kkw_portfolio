@@ -4,9 +4,14 @@ import React, { useEffect, useRef } from 'react';
 
 import { BLOG_MESSAGES } from '@/constants/blog';
 import BlogPost from './BlogPost';
+import { IBlogPost } from '@/types/blog';
 import MotionScrollSection from '../MotionSection';
 import Spinner from '../Spinner';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
+
+interface IBlogPageClientProps {
+  initialData?: IBlogPost[];
+}
 
 /**
  * BlogPageClient 컴포넌트
@@ -14,15 +19,24 @@ import { useBlogPosts } from '@/hooks/useBlogPosts';
  * @description
  * 블로그 게시글 목록을 표시하고 무한 스크롤을 구현하는 클라이언트 컴포넌트
  *
+ * @param initialData - 서버에서 전달받은 초기 데이터 (ISR)
+ *
  * @features
+ * - ISR: 서버에서 전달받은 초기 데이터 활용
  * - React Query의 useInfiniteQuery로 페이지네이션
  * - IntersectionObserver로 자동 스크롤 감지
  * - 에러 상태 처리
  * - 로딩 상태 표시
+ *
+ * @performance
+ * - 첫 페이지 상위 6개 게시물: eager loading
+ * - 나머지 게시물: lazy loading
+ * - 이미지 로딩 최적화로 LCP 개선
+ * - SSR 데이터로 클라이언트 중복 fetch 방지
  */
-export default function BlogPageClient() {
+export default function BlogPageClient({ initialData }: IBlogPageClientProps) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, refetch } =
-    useBlogPosts();
+    useBlogPosts(initialData);
 
   const observerRef = useRef<HTMLDivElement>(null);
 
@@ -100,8 +114,13 @@ export default function BlogPageClient() {
         <div className="flex flex-col space-y-8">
           {data?.pages.map((page, pageIndex) => (
             <React.Fragment key={pageIndex}>
-              {page.map((post) => (
-                <BlogPost key={post.id} post={post} />
+              {page.map((post, postIndex) => (
+                <BlogPost 
+                  key={post.id} 
+                  post={post} 
+                  isFirstPage={pageIndex === 0}
+                  postIndex={postIndex}
+                />
               ))}
             </React.Fragment>
           ))}

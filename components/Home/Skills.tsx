@@ -20,6 +20,11 @@ import { useState } from 'react';
  * - Framer Motion 애니메이션
  * - 반응형 디자인 (모바일/데스크톱)
  *
+ * @performance
+ * - 첫 번째 카테고리의 상위 6개 이미지: eager loading
+ * - 나머지 이미지: lazy loading
+ * - 이미지 크기 명시 (40x40)
+ *
  * @accessibility
  * - 키보드 네비게이션 지원
  * - aria-selected로 활성 탭 표시
@@ -89,7 +94,7 @@ const Skills: React.FC = () => {
             </span>
           </h3>
           <div className="space-y-10" role="list">
-            {SKILL_LIST[currentIndex].map((skill) => (
+            {SKILL_LIST[currentIndex].map((skill, index) => (
               <div
                 key={skill.title}
                 className="flex items-center gap-4"
@@ -104,7 +109,7 @@ const Skills: React.FC = () => {
                     alt=""
                     width={40}
                     height={40}
-                    loading="lazy"
+                    loading={currentIndex === 0 && index < 6 ? 'eager' : 'lazy'}
                     className="w-10 h-10"
                   />
                 </div>
