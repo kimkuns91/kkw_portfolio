@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 
 import { NextLayout, NextProvider } from './providers';
 
-import { Analytics } from '@vercel/analytics/next';
 import { JetBrains_Mono } from 'next/font/google';
 import type { Viewport } from 'next';
 import { cn } from '@/lib/utils';
@@ -59,7 +58,6 @@ export default function RootLayout({
         <NextProvider>
           <NextLayout>{children}</NextLayout>
         </NextProvider>
-        <Analytics />
       </body>
     </html>
   );
