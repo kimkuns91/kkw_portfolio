@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Analytics } from '@vercel/analytics/next';
+// import { Analytics } from '@vercel/analytics/next';
 import Background from '@/components/Home/Background';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
@@ -112,7 +112,7 @@ export const NextLayout = ({ children }: IProviderProps) => {
       <ModalComponent />
       <Footer />
       <SpeedInsights />
-      <Analytics />
+      {/* <Analytics /> */}
     </div>
   );
 };
