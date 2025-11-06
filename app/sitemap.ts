@@ -20,22 +20,22 @@ interface ISitemapItem {
 // 사이트맵 항목 정의
 const sitemapItems: ISitemapItem[] = [
   {
-    path: '',
+    path: '/',
     priority: 1.0,
     changeFrequency: 'daily',
   },
   {
-    path: '/services',
+    path: '/about',
     priority: 0.8,
     changeFrequency: 'weekly',
   },
   {
-    path: '/resume',
+    path: '/blog',
     priority: 0.7,
     changeFrequency: 'monthly',
   },
   {
-    path: '/work',
+    path: '/projects',
     priority: 0.7,
     changeFrequency: 'weekly',
   },

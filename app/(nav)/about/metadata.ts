@@ -26,4 +26,3 @@ export const aboutMetadata: Metadata = {
     images: ['/og-image.png'],
   },
 };
-
