@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 
 import { NextLayout, NextProvider } from './providers';
 
+import { Analytics } from '@vercel/analytics/next';
 import { JetBrains_Mono } from 'next/font/google';
 import type { Viewport } from 'next';
 import { cn } from '@/lib/utils';
@@ -52,17 +53,13 @@ export default function RootLayout({
           type="image/png"
         />
         {/* OG 이미지 preload */}
-        <link
-          rel="preload"
-          href="/og-image.png"
-          as="image"
-          type="image/png"
-        />
+        <link rel="preload" href="/og-image.png" as="image" type="image/png" />
       </head>
       <body className={cn('scrollbar', jetbrainsMono.variable)}>
         <NextProvider>
           <NextLayout>{children}</NextLayout>
         </NextProvider>
+        <Analytics />
       </body>
     </html>
   );
