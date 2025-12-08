@@ -1,10 +1,12 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 import Background from '@/components/Home/Background';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
+import { Intro } from '@/components/Layout/Intro';
 import ModalComponent from '@/components/ModalComponent';
 import PageTransition from '@/components/Layout/PageTransition';
 import { RecoilRoot } from 'recoil';
@@ -12,7 +14,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import StairTransition from '@/components/Layout/StairTransition';
 import { Toaster } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const Analytics = dynamic(
   () => import('@vercel/analytics/react').then((m) => m.Analytics),
@@ -107,16 +109,61 @@ export const NextProvider = ({ children }: IProviderProps) => {
  * - Analytics: 페이지뷰, 체류시간, 이벤트 추적
  */
 export const NextLayout = ({ children }: IProviderProps) => {
+  const pathname = usePathname();
+  const [showIntro, setShowIntro] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+  const [prevPathname, setPrevPathname] = useState<string | null>(null);
+  const [isInitialMount, setIsInitialMount] = useState(true);
+
+  // 메인 페이지 첫 방문 시에만 Intro 표시
+  useEffect(() => {
+    // 세션 스토리지에서 intro 완료 여부 확인
+    const hasSeenIntro = sessionStorage.getItem('introComplete');
+
+    if (pathname === '/' && !hasSeenIntro && isInitialMount) {
+      setShowIntro(true);
+
+      // Intro 애니메이션 시간(3초) + 여유 시간
+      const timer = setTimeout(() => {
+        setShowIntro(false);
+        setIntroComplete(true);
+        setIsInitialMount(false);
+        sessionStorage.setItem('introComplete', 'true');
+      }, 3500);
+
+      return () => clearTimeout(timer);
+    } else {
+      setIntroComplete(true);
+      setIsInitialMount(false);
+    }
+  }, [pathname, isInitialMount]);
+
+  // pathname 변경 추적
+  useEffect(() => {
+    if (!isInitialMount && prevPathname !== null && prevPathname !== pathname) {
+      // 실제 페이지 전환이 일어났을 때만 처리
+    }
+    setPrevPathname(pathname);
+  }, [pathname, prevPathname, isInitialMount]);
+
   return (
     <div className="scrollbar z-[100]">
-      <Header />
-      <StairTransition />
-      <PageTransition>{children}</PageTransition>
-      <Background />
-      <ModalComponent />
-      <Footer />
-      <SpeedInsights />
-      <Analytics />
+      {/* 메인 페이지 첫 방문 시 Intro 표시 */}
+      {showIntro && <Intro />}
+
+      {/* Intro가 끝난 후에만 나머지 컨텐츠 표시 */}
+      {introComplete && (
+        <>
+          <Header />
+          {!isInitialMount && <StairTransition />}
+          <PageTransition>{children}</PageTransition>
+          <Background />
+          <ModalComponent />
+          <Footer />
+          <SpeedInsights />
+          <Analytics />
+        </>
+      )}
     </div>
   );
 };
