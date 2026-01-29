@@ -44,6 +44,8 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        {/* Google AdSense 소유권 확인 */}
+        <meta name="google-adsense-account" content="ca-pub-6018531866853167" />
         {/* 메인 프로필 이미지 preload */}
         <link
           rel="preload"
