@@ -7,7 +7,6 @@ import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
 import ModalComponent from '@/components/ModalComponent';
 import PageTransition from '@/components/Layout/PageTransition';
-import { RecoilRoot } from 'recoil';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import StairTransition from '@/components/Layout/StairTransition';
 import { Toaster } from 'react-hot-toast';
@@ -29,9 +28,12 @@ interface IProviderProps {
  * 전역 상태 관리 및 데이터 fetching을 위한 Provider 래퍼
  *
  * @providers
- * - RecoilRoot: Recoil 전역 상태 관리
  * - QueryClientProvider: React Query 데이터 fetching 및 캐싱
  * - Toaster: react-hot-toast 알림 시스템
+ *
+ * @state
+ * - Zustand: 클라이언트 UI 상태 (모달 등)
+ * - React Query: 서버 상태 (블로그 데이터 등)
  *
  * @performance
  * - QueryClient를 useState로 생성하여 서버/클라이언트 상태 격리
@@ -57,28 +59,26 @@ export const NextProvider = ({ children }: IProviderProps) => {
   );
 
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#18181B',
-              color: '#fff',
-              border: '1px solid #00D9FF',
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#18181B',
+            color: '#fff',
+            border: '1px solid #00D9FF',
+          },
+          success: {
+            iconTheme: {
+              primary: '#00D9FF',
+              secondary: '#fff',
             },
-            success: {
-              iconTheme: {
-                primary: '#00D9FF',
-                secondary: '#fff',
-              },
-            },
-          }}
-        />
-      </QueryClientProvider>
-    </RecoilRoot>
+          },
+        }}
+      />
+    </QueryClientProvider>
   );
 };
 

@@ -37,7 +37,7 @@ const Skills: React.FC = () => {
     <motion.section
       initial="hidden"
       animate="visible"
-      className={cn('container py-10 md:py-20')}
+      className={cn('py-10 md:py-20')}
       aria-label="기술 스택"
     >
       <motion.h2

@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { CiMenuFries } from 'react-icons/ci';
 import { LINKS } from '@/constants';
 import Link from 'next/link';
+import { NavLink } from '../Navigation/NavLink';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -33,17 +34,15 @@ const MobileNav = () => {
         </div>
         {/* nav */}
         <nav className="flex flex-col justify-center items-center gap-8">
-          {LINKS.map((link, index) => (
-            <Link
+          {LINKS.map((link) => (
+            <NavLink
+              key={link.path}
               href={link.path}
-              key={index}
+              label={link.name}
+              isActive={pathname === link.path}
               onClick={handleLinkClick}
-              className={`${
-                link.path === pathname && 'text-accent border-b-2 border-accent'
-              } text-xl capitalize hover:text-accent transition-all`}
-            >
-              {link.name}
-            </Link>
+              variant="mobile"
+            />
           ))}
         </nav>
       </SheetContent>

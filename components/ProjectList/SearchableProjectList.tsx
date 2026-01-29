@@ -56,7 +56,7 @@ const SearchableProjectList: React.FC<ISearchableProjectListProps> = ({
 
   return (
     <MotionScrollSection>
-      <div className="container mb-8">
+      <div className="mb-8">
         <Input
           type="search"
           placeholder={PROJECTS_PAGE_TEXT.searchPlaceholder}

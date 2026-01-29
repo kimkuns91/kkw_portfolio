@@ -30,7 +30,7 @@ const Stats: React.FC = () => {
       role="region"
       aria-label="개발 경력 통계"
     >
-      <div className="container mx-auto">
+      <div className="mx-auto">
         {/* 
           반응형 Grid 레이아웃:
           - 모바일: 2열 Grid, 세로 배치 (2x2)

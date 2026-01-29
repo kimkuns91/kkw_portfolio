@@ -28,33 +28,33 @@ const AboutPage: React.FC = () => {
       <motion.div
         initial="hidden"
         animate="visible"
-        className="container relative flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between"
+        className="relative flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10 justify-between"
       >
         <div className="flex-[1.5]">
-          <motion.h2
+          <motion.h1
             variants={slideInFromLeft(1.5)}
             className="text-2xl md:text-5xl font-bold text-accent mb-10"
           >
             Introduction
-          </motion.h2>
-          <motion.h2
+          </motion.h1>
+          <motion.p
             variants={slideInFromLeft(1.6)}
             className="font-bold text-2xl md:text-4xl md:leading-tight text-zinc-50 max-w-4xl"
           >
             안녕하세요!
-          </motion.h2>
-          <motion.h2
+          </motion.p>
+          <motion.p
             variants={slideInFromLeft(1.7)}
             className="font-bold text-2xl md:text-4xl md:leading-tight text-zinc-50 max-w-4xl"
           >
             끊임없이 도전하고 배우는 개발자
-          </motion.h2>
-          <motion.h2
+          </motion.p>
+          <motion.p
             variants={slideInFromLeft(1.8)}
             className="font-bold text-2xl md:text-4xl md:leading-tight text-zinc-50 max-w-4xl"
           >
             <span className="gradientMoveTitle mr-2">김건우</span>입니다
-          </motion.h2>
+          </motion.p>
           <motion.div
             variants={slideInFromLeft(2.0)}
             className="font-bold text-2xl md:text-4xl md:leading-tight text-zinc-50 max-w-4xl"
@@ -71,22 +71,24 @@ const AboutPage: React.FC = () => {
       <Skills />
 
       {/* Timeline Section */}
-      <motion.div
+      <motion.section
         initial="hidden"
         animate="visible"
-        className="container py-12 pb-24"
+        className="py-12 pb-24"
+        aria-labelledby="timeline-heading"
       >
         <motion.h2
+          id="timeline-heading"
           variants={slideInFromLeft(1.5)}
           className="text-2xl md:text-5xl font-bold text-accent mb-10"
         >
           TimeLine
         </motion.h2>
-        <h2 className="font-bold text-xl mb-20 lg:mb-28 md:text-2xl md:leading-tight text-neutral-light">
+        <p className="font-bold text-xl mb-20 lg:mb-28 md:text-2xl md:leading-tight text-neutral-light">
           제가 그동안 어떻게 지냈는지 시간 여행을 떠나봅시다!
-        </h2>
+        </p>
         <Timeline />
-      </motion.div>
+      </motion.section>
     </MotionScrollSection>
   );
 };

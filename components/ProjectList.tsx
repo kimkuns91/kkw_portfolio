@@ -14,7 +14,7 @@ const ProjectList = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className={cn('container py-10 md:py-20')}
+      className={cn('py-10 md:py-20')}
     >
       <motion.h2
         initial="hidden"

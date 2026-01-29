@@ -3,13 +3,14 @@ import '@/styles/globals.css';
 import { NextLayout, NextProvider } from './providers';
 
 import { JetBrains_Mono } from 'next/font/google';
+import { JsonLd } from '@/components/JsonLd';
 import type { Viewport } from 'next';
 import { cn } from '@/lib/utils';
 import { rootMetadata } from './layout.metadata';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
+  weight: ['400', '600', '700'], // 실제 사용되는 웨이트만 로드 (성능 최적화)
   variable: '--font-jetbrainsMono',
 });
 
@@ -34,7 +35,7 @@ export const metadata = rootMetadata;
  * - 전역 스타일 적용
  * - 메타데이터 설정
  * - 중요 이미지 preload (성능 최적화)
- * - Provider 래핑 (React Query, Recoil, Toast)
+ * - Provider 래핑 (React Query, Zustand, Toast)
  */
 export default function RootLayout({
   children,
@@ -55,6 +56,8 @@ export default function RootLayout({
         />
         {/* OG 이미지 preload */}
         <link rel="preload" href="/og-image.png" as="image" type="image/png" />
+        {/* JSON-LD 구조화 데이터 (SEO) */}
+        <JsonLd />
       </head>
       <body className={cn('scrollbar', jetbrainsMono.variable)}>
         <NextProvider>

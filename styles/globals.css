@@ -9,6 +9,22 @@
     @apply font-primary bg-primary text-white leading-loose;
   }
 
+  /* 접근성: focus-visible 스타일 일관성 */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  /* 버튼, 링크에 focus-visible 적용 */
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent rounded-sm;
+  }
+
+  /* main 콘텐츠 focus 시 outline 제거 (skip link 대상) */
+  main:focus {
+    @apply outline-none;
+  }
+
   .h1 {
     @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
   }

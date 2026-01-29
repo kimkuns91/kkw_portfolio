@@ -1,25 +1,32 @@
 'use client';
 
-import 'github-markdown-css';
-
 import { AnimatePresence, motion } from 'framer-motion';
-import { ComponentProps, useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward, IoIosClose } from 'react-icons/io';
+import { useEffect, useState } from 'react';
 
 import { FaGithub } from 'react-icons/fa';
 import { GrDeploy } from 'react-icons/gr';
 import Image from 'next/image';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import remarkGfm from 'remark-gfm';
+import dynamic from 'next/dynamic';
 import { useStore } from '@/store';
 
-type CodeProps = ComponentProps<'code'> & {
-  inline?: boolean;
-  children?: React.ReactNode;
-};
+// 마크다운 렌더링 컴포넌트를 동적 import (번들 사이즈 최적화)
+// react-markdown (~50KB) + react-syntax-highlighter (~188KB) 분리
+const MarkdownContent = dynamic(
+  () => import('./Modal/MarkdownContent'),
+  {
+    loading: () => (
+      <div className="py-6 md:py-10 animate-pulse">
+        <div className="h-4 bg-neutral-dark/30 rounded w-3/4 mb-4" />
+        <div className="h-4 bg-neutral-dark/30 rounded w-full mb-4" />
+        <div className="h-4 bg-neutral-dark/30 rounded w-5/6 mb-4" />
+        <div className="h-4 bg-neutral-dark/30 rounded w-2/3" />
+      </div>
+    ),
+    ssr: false,
+  }
+);
 
 const ModalComponent: React.FC = () => {
   const { isModalOpen, setModalOpen, project } = useStore();
@@ -81,6 +88,7 @@ const ModalComponent: React.FC = () => {
             >
               <button
                 onClick={handleClose}
+                aria-label="모달 닫기"
                 className="absolute flex items-center justify-center top-5 right-5 w-10 h-10 z-20 bg-black rounded-full"
               >
                 <IoIosClose className="text-4xl text-white font-bold" />
@@ -101,12 +109,14 @@ const ModalComponent: React.FC = () => {
                   <>
                     <button
                       onClick={prevImage}
+                      aria-label="이전 이미지"
                       className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors"
                     >
                       <IoIosArrowBack className="text-white text-2xl" />
                     </button>
                     <button
                       onClick={nextImage}
+                      aria-label="다음 이미지"
                       className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors"
                     >
                       <IoIosArrowForward className="text-white text-2xl" />
@@ -116,6 +126,7 @@ const ModalComponent: React.FC = () => {
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
+                          aria-label={`이미지 ${index + 1}로 이동`}
                           className={`w-2 h-2 rounded-full transition-colors ${
                             index === currentImageIndex
                               ? 'bg-white'
@@ -160,38 +171,10 @@ const ModalComponent: React.FC = () => {
                       )}
                     </div>
 
-                    <div className="prose prose-invert max-w-none markdown-body py-6 md:py-10">
-                      <ReactMarkdown
-                        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
-                        components={{
-                          code({
-                            inline,
-                            className,
-                            children,
-                            ...props
-                          }: CodeProps) {
-                            const match = /language-(\w+)/.exec(
-                              className || ''
-                            );
-                            return !inline && match ? (
-                              <SyntaxHighlighter
-                                style={materialDark}
-                                language={match[1]}
-                                PreTag="div"
-                              >
-                                {String(children).replace(/\n$/, '')}
-                              </SyntaxHighlighter>
-                            ) : (
-                              <code className={className} {...props}>
-                                {children}
-                              </code>
-                            );
-                          },
-                        }}
-                      >
-                        {project?.content || ''}
-                      </ReactMarkdown>
-                    </div>
+                    {project?.content && (
+                      <MarkdownContent content={project.content} />
+                    )}
+
                     <hr className="border-neutral-dark" />
                     <div className="flex flex-col gap-4">
                       <h2 className="text-2xl mb-6 md:text-4xl font-bold">

@@ -2,7 +2,6 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   // 성능 최적화
-  swcMinify: true, // SWC 기반 코드 압축
   reactStrictMode: true, // React Strict Mode 활성화
   
   // JavaScript 번들 최적화
@@ -40,8 +39,35 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // 캐싱 헤더 설정
+  // 보안 및 캐싱 헤더 설정
   headers: async () => [
+    // 보안 헤더 (모든 경로에 적용)
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+        {
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin',
+        },
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block',
+        },
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=(), microphone=(), geolocation=()',
+        },
+      ],
+    },
+    // 정적 자산 캐싱
     {
       source: '/images/:path*',
       headers: [

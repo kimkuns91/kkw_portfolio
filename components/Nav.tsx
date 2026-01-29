@@ -1,26 +1,23 @@
-"use client";
+'use client';
 
-import { LINKS } from "@/constants";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { LINKS } from '@/constants';
+import { NavLink } from './Navigation/NavLink';
+import { usePathname } from 'next/navigation';
 
 const Nav = () => {
   const pathname = usePathname();
+
   return (
     <nav className="flex gap-8">
-      {LINKS.map((link, index) => {
-        return (
-          <Link
-            href={link.path}
-            key={index}
-            className={`${
-              link.path === pathname && "text-accent border-b-2 border-accent"
-            } capitalize font-medium hover:text-accent transition-all`}
-          >
-            {link.name}
-          </Link>
-        );
-      })}
+      {LINKS.map((link) => (
+        <NavLink
+          key={link.path}
+          href={link.path}
+          label={link.name}
+          isActive={pathname === link.path}
+          variant="desktop"
+        />
+      ))}
     </nav>
   );
 };

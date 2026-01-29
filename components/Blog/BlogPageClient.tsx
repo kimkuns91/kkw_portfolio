@@ -71,7 +71,7 @@ export default function BlogPageClient({ initialData }: IBlogPageClientProps) {
   if (status === 'error') {
     return (
       <MotionScrollSection>
-        <div className="container min-h-screen mx-auto flex flex-col items-center justify-center">
+        <div className="min-h-screen mx-auto flex flex-col items-center justify-center">
           <div className="text-center space-y-4">
             <h2 className="text-2xl md:text-4xl font-bold text-red-400">
               {BLOG_MESSAGES.errorTitle}
@@ -93,7 +93,7 @@ export default function BlogPageClient({ initialData }: IBlogPageClientProps) {
   if (status === 'pending') {
     return (
       <MotionScrollSection>
-        <div className="container min-h-screen mx-auto flex items-center justify-center">
+        <div className="min-h-screen mx-auto flex items-center justify-center">
           <Spinner />
         </div>
       </MotionScrollSection>
@@ -102,7 +102,7 @@ export default function BlogPageClient({ initialData }: IBlogPageClientProps) {
 
   return (
     <MotionScrollSection>
-      <div className="container min-h-screen mx-auto">
+      <div className="min-h-screen mx-auto">
         <h2 className="h2 text-center gradientMoveTitle mb-6">
           {BLOG_MESSAGES.title}
         </h2>

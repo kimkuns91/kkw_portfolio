@@ -29,7 +29,9 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
           }}
           className="fixed inset-0 bg-primary z-[30] pointer-events-none"
         />
-        {children}
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
       </motion.div>
     </AnimatePresence>
   );

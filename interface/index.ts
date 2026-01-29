@@ -14,12 +14,3 @@ export interface IProject {
 export interface IProjectList {
   projects: IProject[];
 }
-
-// Deprecated: Use IContactForm from types/contact.ts instead
-export interface ContactFormType {
-  name?: string;
-  email?: string;
-  phone?: string;
-  service?: string;
-  message?: string;
-}
