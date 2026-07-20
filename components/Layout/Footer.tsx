@@ -114,6 +114,14 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
+              <li className="list-none">
+                <Link
+                  className="transition-colors text-neutral-dark hover:text-neutral-light"
+                  href="/privacy"
+                >
+                  개인정보 처리방침
+                </Link>
+              </li>
             </ul>
           </nav>
 

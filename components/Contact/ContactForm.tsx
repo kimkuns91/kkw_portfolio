@@ -22,11 +22,14 @@ import { Button } from '../ui/button';
 import Grid from './Grid';
 import { IContactForm } from '@/types/contact';
 import { Input } from '../ui/input';
+import Link from 'next/link';
+import { PRIVACY_CONSENT_SUMMARY } from '@/constants/privacy';
 import Spinner from '../Spinner';
 import { Textarea } from '../ui/textarea';
+import Turnstile from './Turnstile';
 import toast from 'react-hot-toast';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 
 /**
  * ContactForm 컴포넌트
@@ -40,9 +43,16 @@ import { useState } from 'react';
  * - 이메일 형식 검증
  * - 전송 상태 표시
  * - 성공/실패 토스트 메시지
+ * - 개인정보 수집 및 이용 동의 (필수)
+ * - Cloudflare Turnstile 캡챠
  */
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [captchaResetSignal, setCaptchaResetSignal] = useState(0);
+
+  // Turnstile 사이트 키가 없으면 캡챠를 요구하지 않는다 (Turnstile.tsx 참고).
+  const isCaptchaEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
   const {
     register,
@@ -58,12 +68,22 @@ export const ContactForm = () => {
       phone: '',
       service: '',
       message: '',
+      consent: false,
     },
   });
 
   const serviceValue = watch('service');
 
+  const handleVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+  }, []);
+
   const onSubmit = async (data: IContactForm) => {
+    if (isCaptchaEnabled && !turnstileToken) {
+      toast.error(TOAST_MESSAGES.captchaRequired);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -72,7 +92,7 @@ export const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
 
       if (!response.ok) {
@@ -85,6 +105,8 @@ export const ContactForm = () => {
       console.error('Error submitting form:', error);
       toast.error(TOAST_MESSAGES.error);
     } finally {
+      // 토큰은 성공·실패 여부와 무관하게 1회용이므로 항상 새로 발급받는다.
+      setCaptchaResetSignal((signal) => signal + 1);
       setIsSubmitting(false);
     }
   };
@@ -218,6 +240,49 @@ export const ContactForm = () => {
           </span>
         )}
       </div>
+
+      {/* 개인정보 수집 및 이용 동의 */}
+      <div className="relative z-20 w-full">
+        <div className="flex items-start gap-3">
+          <input
+            id="consent"
+            type="checkbox"
+            className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-accent"
+            {...register('consent', {
+              required: FORM_VALIDATION_MESSAGES.consentRequired,
+            })}
+            aria-invalid={errors.consent ? 'true' : 'false'}
+          />
+          <label
+            className="cursor-pointer text-sm font-medium text-neutral-light"
+            htmlFor="consent"
+          >
+            {FORM_LABELS.consent} <span className="text-error">*</span>{' '}
+            <Link
+              href="/privacy"
+              target="_blank"
+              className="text-accent underline underline-offset-2"
+            >
+              {FORM_LABELS.consentLink}
+            </Link>
+          </label>
+        </div>
+
+        <p className="mt-2 pl-7 text-xs leading-relaxed text-neutral-dark">
+          수집 항목: {PRIVACY_CONSENT_SUMMARY.items} / 이용 목적:{' '}
+          {PRIVACY_CONSENT_SUMMARY.purpose} / 보유 기간:{' '}
+          {PRIVACY_CONSENT_SUMMARY.retention}
+        </p>
+
+        {errors.consent && (
+          <span className="text-red-600 text-sm" role="alert">
+            {errors.consent.message}
+          </span>
+        )}
+      </div>
+
+      {/* 자동 입력 방지 (Cloudflare Turnstile) */}
+      <Turnstile onVerify={handleVerify} resetSignal={captchaResetSignal} />
 
       {/* Submit Button */}
       <Button

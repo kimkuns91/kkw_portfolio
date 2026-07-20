@@ -29,6 +29,8 @@ export const FORM_LABELS = {
   message: '내용',
   submit: '보내기',
   submitting: '전송 중...',
+  consent: '개인정보 수집 및 이용에 동의합니다.',
+  consentLink: '자세히 보기',
 } as const;
 
 // 폼 플레이스홀더
@@ -47,6 +49,7 @@ export const FORM_VALIDATION_MESSAGES = {
   emailInvalid: '올바른 이메일 주소를 입력하세요.',
   messageRequired: '메시지는 필수 항목입니다.',
   allFieldsRequired: '필수 항목들을 모두 입력해주세요.',
+  consentRequired: '개인정보 수집 및 이용에 동의해주세요.',
 } as const;
 
 // 토스트 메시지
@@ -54,6 +57,7 @@ export const TOAST_MESSAGES = {
   success: '이메일 전송에 성공했습니다.',
   error: '이메일 전송에 실패했습니다.',
   networkError: '네트워크 오류가 발생했습니다.',
+  captchaRequired: '자동 입력 방지 확인을 완료해주세요.',
 } as const;
 
 // 페이지 텍스트
