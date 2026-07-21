@@ -42,12 +42,30 @@ export const FORM_PLACEHOLDERS = {
   message: '내용을 입력해주세요.',
 } as const;
 
+// 입력 길이 제한 (클라이언트·서버 공통 기준)
+export const FIELD_LIMITS = {
+  name: 50,
+  email: 100,
+  phone: 20,
+  service: 50,
+  messageMin: 5,
+  messageMax: 2000,
+} as const;
+
+// 전화번호 형식: 숫자, +, -, (), 공백만 허용 (7~20자)
+export const PHONE_REGEX = /^[0-9+\-()\s]{7,20}$/;
+
 // 폼 검증 메시지
 export const FORM_VALIDATION_MESSAGES = {
   nameRequired: '이름은 필수 항목입니다.',
+  nameTooLong: `이름은 ${FIELD_LIMITS.name}자 이내로 입력해주세요.`,
   emailRequired: '이메일은 필수 항목입니다.',
   emailInvalid: '올바른 이메일 주소를 입력하세요.',
+  emailTooLong: `이메일은 ${FIELD_LIMITS.email}자 이내로 입력해주세요.`,
+  phoneInvalid: '올바른 전화번호 형식이 아닙니다. (숫자, +, -, 공백만 가능)',
   messageRequired: '메시지는 필수 항목입니다.',
+  messageTooShort: `메시지는 최소 ${FIELD_LIMITS.messageMin}자 이상 입력해주세요.`,
+  messageTooLong: `메시지는 ${FIELD_LIMITS.messageMax}자 이내로 입력해주세요.`,
   allFieldsRequired: '필수 항목들을 모두 입력해주세요.',
   consentRequired: '개인정보 수집 및 이용에 동의해주세요.',
 } as const;

@@ -2,9 +2,11 @@
 
 import {
   EMAIL_REGEX,
+  FIELD_LIMITS,
   FORM_LABELS,
   FORM_PLACEHOLDERS,
   FORM_VALIDATION_MESSAGES,
+  PHONE_REGEX,
   SERVICE_OPTIONS,
   TOAST_MESSAGES,
 } from '@/constants/contact';
@@ -30,6 +32,11 @@ import Turnstile from './Turnstile';
 import toast from 'react-hot-toast';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+/** 제출 값에서 앞뒤 공백을 제거한다. 공백만 입력한 경우 빈 문자열이 되어
+ * required 검증에 걸린다. */
+const trimValue = (value: string) =>
+  typeof value === 'string' ? value.trim() : value;
 
 /**
  * ContactForm 컴포넌트
@@ -131,8 +138,14 @@ export const ContactForm = () => {
           type="text"
           placeholder={FORM_PLACEHOLDERS.name}
           className="w-full"
+          maxLength={FIELD_LIMITS.name}
           {...register('name', {
+            setValueAs: trimValue,
             required: FORM_VALIDATION_MESSAGES.nameRequired,
+            maxLength: {
+              value: FIELD_LIMITS.name,
+              message: FORM_VALIDATION_MESSAGES.nameTooLong,
+            },
           })}
           aria-invalid={errors.name ? 'true' : 'false'}
         />
@@ -156,8 +169,14 @@ export const ContactForm = () => {
           type="email"
           placeholder={FORM_PLACEHOLDERS.email}
           className="w-full"
+          maxLength={FIELD_LIMITS.email}
           {...register('email', {
+            setValueAs: trimValue,
             required: FORM_VALIDATION_MESSAGES.emailRequired,
+            maxLength: {
+              value: FIELD_LIMITS.email,
+              message: FORM_VALIDATION_MESSAGES.emailTooLong,
+            },
             pattern: {
               value: EMAIL_REGEX,
               message: FORM_VALIDATION_MESSAGES.emailInvalid,
@@ -185,8 +204,21 @@ export const ContactForm = () => {
           type="tel"
           placeholder={FORM_PLACEHOLDERS.phone}
           className="w-full"
-          {...register('phone')}
+          maxLength={FIELD_LIMITS.phone}
+          {...register('phone', {
+            setValueAs: trimValue,
+            pattern: {
+              value: PHONE_REGEX,
+              message: FORM_VALIDATION_MESSAGES.phoneInvalid,
+            },
+          })}
+          aria-invalid={errors.phone ? 'true' : 'false'}
         />
+        {errors.phone && (
+          <span className="text-red-600 text-sm" role="alert">
+            {errors.phone.message}
+          </span>
+        )}
       </div>
 
       {/* Service Field */}
@@ -229,8 +261,18 @@ export const ContactForm = () => {
           id="message"
           className="h-[200px]"
           placeholder={FORM_PLACEHOLDERS.message}
+          maxLength={FIELD_LIMITS.messageMax}
           {...register('message', {
+            setValueAs: trimValue,
             required: FORM_VALIDATION_MESSAGES.messageRequired,
+            minLength: {
+              value: FIELD_LIMITS.messageMin,
+              message: FORM_VALIDATION_MESSAGES.messageTooShort,
+            },
+            maxLength: {
+              value: FIELD_LIMITS.messageMax,
+              message: FORM_VALIDATION_MESSAGES.messageTooLong,
+            },
           })}
           aria-invalid={errors.message ? 'true' : 'false'}
         />

@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { buildOwnerEmail, buildSubmitterEmail } from '@/lib/emailTemplates';
 
+import { EMAIL_REGEX, FIELD_LIMITS, PHONE_REGEX, SERVICE_OPTIONS } from '@/constants/contact';
 import { IContactRequest } from '@/types/contact';
 import nodemailer from 'nodemailer';
 
 const TURNSTILE_VERIFY_URL =
   'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+const ALLOWED_SERVICES = new Set<string>(SERVICE_OPTIONS.map((o) => o.value));
 
 /**
  * 이메일 HTML 템플릿에 삽입할 사용자 입력을 이스케이프한다.
@@ -72,13 +76,40 @@ const verifyTurnstile = async (
 export async function POST(request: NextRequest) {
   try {
     const formData: IContactRequest = await request.json();
-    const { name, email, phone, service, message, consent, turnstileToken } =
-      formData;
+    const { consent, turnstileToken } = formData;
+
+    // 클라이언트 우회 요청에 대비해 서버에서도 문자열 정규화 후 재검증한다.
+    const name = typeof formData.name === 'string' ? formData.name.trim() : '';
+    const email =
+      typeof formData.email === 'string' ? formData.email.trim() : '';
+    const phone =
+      typeof formData.phone === 'string' ? formData.phone.trim() : '';
+    const service =
+      typeof formData.service === 'string' ? formData.service.trim() : '';
+    const message =
+      typeof formData.message === 'string' ? formData.message.trim() : '';
 
     // 필수 필드 검증
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Required fields are missing' },
+        { status: 400 }
+      );
+    }
+
+    // 형식 및 길이 검증 (클라이언트와 동일 기준)
+    if (
+      name.length > FIELD_LIMITS.name ||
+      email.length > FIELD_LIMITS.email ||
+      phone.length > FIELD_LIMITS.phone ||
+      message.length < FIELD_LIMITS.messageMin ||
+      message.length > FIELD_LIMITS.messageMax ||
+      !EMAIL_REGEX.test(email) ||
+      (phone && !PHONE_REGEX.test(phone)) ||
+      (service && !ALLOWED_SERVICES.has(service))
+    ) {
+      return NextResponse.json(
+        { error: 'Invalid input' },
         { status: 400 }
       );
     }
@@ -121,7 +152,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // HTML 이메일 템플릿 (사용자 입력은 모두 이스케이프)
+    // 템플릿에 들어갈 사용자 입력은 모두 이스케이프한다.
     const safe = {
       name: escapeHtml(name),
       email: escapeHtml(email),
@@ -130,36 +161,45 @@ export async function POST(request: NextRequest) {
       message: escapeHtml(message),
     };
 
-    const htmlContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
-        <h2 style="color: #333; border-bottom: 2px solid #00D9FF; padding-bottom: 10px;">새로운 문의가 도착했습니다</h2>
-        <div style="margin: 20px 0;">
-          <p style="color: #555; margin: 10px 0;"><strong>이름:</strong> ${safe.name}</p>
-          <p style="color: #555; margin: 10px 0;"><strong>이메일:</strong> <a href="mailto:${safe.email}" style="color: #00D9FF;">${safe.email}</a></p>
-          ${safe.phone ? `<p style="color: #555; margin: 10px 0;"><strong>전화번호:</strong> ${safe.phone}</p>` : ''}
-          ${safe.service ? `<p style="color: #555; margin: 10px 0;"><strong>서비스:</strong> ${safe.service}</p>` : ''}
-        </div>
-        <div style="margin: 20px 0;">
-          <p style="color: #555; margin-bottom: 10px;"><strong>메시지:</strong></p>
-          <div style="color: #555; background-color: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; white-space: pre-wrap;">${safe.message}</div>
-        </div>
-        <p style="font-size: 0.9em; color: #777; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 20px;">
-          이 메일은 portfolio.whitemouse.dev의 문의 폼을 통해 자동으로 전송되었습니다.
-        </p>
-      </div>
-    `;
+    // 메일 제목에는 HTML이 아닌 원본 이름을 쓰되, 헤더 인젝션 방지를 위해
+    // 개행 문자를 제거한다.
+    const subjectName = name.replace(/[\r\n]+/g, ' ');
 
-    // 이메일 옵션
-    const mailOptions = {
+    // 1) 운영자에게: 문의 원본
+    const ownerMail = {
       from: process.env.EMAIL_USER,
-      to: [email, process.env.EMAIL_USER],
-      subject: `[포트폴리오] ${safe.name}님으로부터 새로운 문의`,
-      html: htmlContent,
+      to: process.env.EMAIL_USER,
+      subject: `[포트폴리오] ${subjectName}님으로부터 새로운 문의`,
+      html: buildOwnerEmail({
+        name: safe.name,
+        email: safe.email,
+        phone: safe.phone,
+        service: safe.service,
+        message: safe.message,
+        rawEmail: email,
+      }),
       replyTo: email,
     };
 
-    // 이메일 전송
-    await transporter.sendMail(mailOptions);
+    // 2) 제출자에게: 접수 확인(자동응답)
+    const submitterMail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: '[WhiteMouseDev] 문의가 정상적으로 접수되었습니다',
+      html: buildSubmitterEmail({
+        name: safe.name,
+        message: safe.message,
+      }),
+    };
+
+    // 운영자 메일 전송은 반드시 성공해야 하며, 제출자 확인 메일 실패는
+    // 전체 요청을 실패로 처리하지 않는다(운영자는 이미 문의를 수신).
+    await transporter.sendMail(ownerMail);
+    try {
+      await transporter.sendMail(submitterMail);
+    } catch (confirmError) {
+      console.error('Confirmation email failed:', confirmError);
+    }
 
     return NextResponse.json(
       { 
