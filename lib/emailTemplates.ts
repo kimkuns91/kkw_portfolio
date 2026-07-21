@@ -18,7 +18,7 @@ const BRAND = {
   logoUrl: 'https://www.whitemouse.dev/images/logo.png',
   accent: '#00D9FF',
   purple: '#b46ef3',
-  outerBg: '#0d0d10',
+  outerBg: '#f4f4f5',
   cardBg: '#18181B',
   subCardBg: '#1c1c22',
   border: 'rgba(255,255,255,0.08)',
