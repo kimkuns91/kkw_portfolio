@@ -27,7 +27,7 @@ const generateProjectsMetadata = (): Metadata => {
     openGraph: {
       title: 'Projects | 김건우 포트폴리오',
       description,
-      url: 'https://portfolio.whitemouse.dev/projects',
+      url: 'https://www.whitemouse.dev/projects',
       siteName: '김건우 포트폴리오',
       images: [
         {

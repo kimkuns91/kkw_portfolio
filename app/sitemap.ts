@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 // 기본 URL 상수 정의
-const BASE_URL = 'https://portfolio.whitemouse.dev';
+const BASE_URL = 'https://www.whitemouse.dev';
 
 // 사이트맵 항목 인터페이스 정의
 interface ISitemapItem {

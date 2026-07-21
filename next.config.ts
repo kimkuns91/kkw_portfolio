@@ -39,6 +39,16 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // 도메인 정규화: 구 호스트(portfolio.)로 접근하면 정규 주소(www.)로 301
+  redirects: async () => [
+    {
+      source: '/:path*',
+      has: [{ type: 'host', value: 'portfolio.whitemouse.dev' }],
+      destination: 'https://www.whitemouse.dev/:path*',
+      permanent: true,
+    },
+  ],
+
   // 보안 및 캐싱 헤더 설정
   headers: async () => [
     // 보안 헤더 (모든 경로에 적용)

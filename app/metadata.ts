@@ -19,7 +19,7 @@ export const homeMetadata: Metadata = {
   openGraph: {
     title: '김건우 포트폴리오 | Fullstack Developer',
     description: '끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.',
-    url: 'https://portfolio.whitemouse.dev',
+    url: 'https://www.whitemouse.dev',
     siteName: '김건우 포트폴리오',
     images: [
       {
