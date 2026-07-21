@@ -14,7 +14,7 @@ import { Metadata } from 'next';
  * - 검색 엔진 검증 (Google, Naver)
  */
 export const rootMetadata: Metadata = {
-  metadataBase: new URL('https://www.whitemouse.dev'),
+  metadataBase: new URL('https://portfolio.whitemouse.dev'),
   title: {
     default: '김건우 포트폴리오 | Fullstack Developer',
     template: '%s | 김건우 포트폴리오',
@@ -71,7 +71,7 @@ export const rootMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://www.whitemouse.dev',
+    url: 'https://portfolio.whitemouse.dev',
     title: '김건우 포트폴리오 | Fullstack Developer',
     description: '끊임없이 도전하고 배우는 Fullstack 개발자 김건우입니다.',
     siteName: '김건우 포트폴리오',

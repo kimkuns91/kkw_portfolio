@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin', '/private/', '/dashboard'],
       },
     ],
-    sitemap: 'https://www.whitemouse.dev/sitemap.xml',
-    host: 'https://www.whitemouse.dev',
+    sitemap: 'https://portfolio.whitemouse.dev/sitemap.xml',
+    host: 'https://portfolio.whitemouse.dev',
   };
 }

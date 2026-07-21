@@ -61,7 +61,7 @@ export const blogMetadata: Metadata = {
   // Open Graph (SNS 공유 최적화)
   openGraph: {
     type: 'website',
-    url: 'https://www.whitemouse.dev/blog',
+    url: 'https://portfolio.whitemouse.dev/blog',
     title: 'Blog | 김건우 포트폴리오',
     description: BLOG_DESCRIPTION,
     siteName: '김건우 포트폴리오',

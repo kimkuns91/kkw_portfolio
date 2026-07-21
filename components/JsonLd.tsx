@@ -11,7 +11,7 @@
  * - BreadcrumbList: 네비게이션 구조
  */
 
-const BASE_URL = 'https://www.whitemouse.dev';
+const BASE_URL = 'https://portfolio.whitemouse.dev';
 
 // Person 스키마 - 개발자 정보
 const personSchema = {

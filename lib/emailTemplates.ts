@@ -12,10 +12,10 @@
  */
 
 const BRAND = {
-  portfolioUrl: 'https://www.whitemouse.dev',
+  portfolioUrl: 'https://portfolio.whitemouse.dev',
   blogUrl: 'https://blog.whitemouse.dev',
   githubUrl: 'https://github.com/kimkuns91',
-  logoUrl: 'https://www.whitemouse.dev/images/logo.png',
+  logoUrl: 'https://portfolio.whitemouse.dev/images/logo.png',
   accent: '#00D9FF',
   purple: '#b46ef3',
   outerBg: '#f4f4f5',

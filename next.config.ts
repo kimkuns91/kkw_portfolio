@@ -39,12 +39,15 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // 도메인 정규화: 구 호스트(portfolio.)로 접근하면 정규 주소(www.)로 301
+  // 도메인 정규화: 정규 주소는 portfolio.whitemouse.dev (이력서 기재 주소).
+  // www 접근은 portfolio로 301. 단 /ads.txt는 제외 —
+  // AdSense가 루트(whitemouse.dev) → www 체인으로 ads.txt를 감지하므로
+  // 이 경로는 www에서 직접 200으로 서빙을 유지한다.
   redirects: async () => [
     {
-      source: '/:path*',
-      has: [{ type: 'host', value: 'portfolio.whitemouse.dev' }],
-      destination: 'https://www.whitemouse.dev/:path*',
+      source: '/:path((?!ads\\.txt$).*)',
+      has: [{ type: 'host', value: 'www.whitemouse.dev' }],
+      destination: 'https://portfolio.whitemouse.dev/:path',
       permanent: true,
     },
   ],
