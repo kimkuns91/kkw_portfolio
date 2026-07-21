@@ -69,6 +69,8 @@ export const ContactForm = () => {
     setValue,
     watch,
   } = useForm<IContactForm>({
+    // 필드를 처음 벗어날 때 검증하고, 이후에는 입력 즉시 재검증한다.
+    mode: 'onTouched',
     defaultValues: {
       name: '',
       email: '',
