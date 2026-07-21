@@ -55,6 +55,39 @@ export const FIELD_LIMITS = {
 // 전화번호 형식: 숫자, +, -, (), 공백만 허용 (7~20자)
 export const PHONE_REGEX = /^[0-9+\-()\s]{7,20}$/;
 
+/**
+ * 한국 휴대폰 번호일 때만 하이픈을 붙여 정리한다.
+ *
+ * @description
+ * 01로 시작하는 숫자 10~11자리(휴대폰)만 대상으로 하며,
+ * 국제번호(+..)나 지역번호 등 그 외 형식은 원본을 그대로 반환한다.
+ * blur 시점에 한 번만 호출하는 용도로, 입력 중 커서 이동은 발생하지 않는다.
+ *
+ * @example
+ * formatKoreanMobile('01085959869') // '010-8595-9869'
+ * formatKoreanMobile('+1 415 555 0100') // '+1 415 555 0100' (그대로)
+ */
+export const formatKoreanMobile = (value: string): string => {
+  const trimmed = value.trim();
+
+  // +로 시작하면 국제번호로 간주하고 손대지 않는다.
+  if (trimmed.startsWith('+')) return trimmed;
+
+  const digits = trimmed.replace(/\D/g, '');
+
+  // 01로 시작하는 휴대폰 번호만 포맷
+  if (!digits.startsWith('01')) return trimmed;
+
+  if (digits.length === 11) {
+    return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  }
+  if (digits.length === 10) {
+    return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+  }
+
+  return trimmed;
+};
+
 // 폼 검증 메시지
 export const FORM_VALIDATION_MESSAGES = {
   nameRequired: '이름은 필수 항목입니다.',

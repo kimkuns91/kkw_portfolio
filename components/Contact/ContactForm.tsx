@@ -9,13 +9,13 @@ import {
   PHONE_REGEX,
   SERVICE_OPTIONS,
   TOAST_MESSAGES,
+  formatKoreanMobile,
 } from '@/constants/contact';
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -82,6 +82,23 @@ export const ContactForm = () => {
   });
 
   const serviceValue = watch('service');
+
+  // 전화번호 필드는 blur 시점에 한국 휴대폰이면 하이픈을 붙여 정리한다.
+  const phoneField = register('phone', {
+    setValueAs: trimValue,
+    pattern: {
+      value: PHONE_REGEX,
+      message: FORM_VALIDATION_MESSAGES.phoneInvalid,
+    },
+  });
+
+  const handlePhoneBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    phoneField.onBlur(event);
+    const formatted = formatKoreanMobile(event.target.value);
+    if (formatted !== event.target.value) {
+      setValue('phone', formatted, { shouldValidate: true });
+    }
+  };
 
   const handleVerify = useCallback((token: string) => {
     setTurnstileToken(token);
@@ -207,13 +224,8 @@ export const ContactForm = () => {
           placeholder={FORM_PLACEHOLDERS.phone}
           className="w-full"
           maxLength={FIELD_LIMITS.phone}
-          {...register('phone', {
-            setValueAs: trimValue,
-            pattern: {
-              value: PHONE_REGEX,
-              message: FORM_VALIDATION_MESSAGES.phoneInvalid,
-            },
-          })}
+          {...phoneField}
+          onBlur={handlePhoneBlur}
           aria-invalid={errors.phone ? 'true' : 'false'}
         />
         {errors.phone && (
@@ -240,7 +252,6 @@ export const ContactForm = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>{FORM_PLACEHOLDERS.service}</SelectLabel>
               {SERVICE_OPTIONS.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
