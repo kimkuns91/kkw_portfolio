@@ -771,7 +771,7 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
 ---
 
 ## 📞 연락처
-- 📧 Email: kimkuns91@gmail.com
+- 📧 Email: whitemousedev@gmail.com
 - 💻 GitHub: https://github.com/kimkuns91
 - 📝 Blog: https://velog.io/@kimkuns
 `,
@@ -887,7 +887,7 @@ Next.js 15와 최신 웹 기술을 활용하여 개인 포트폴리오 웹사이
     ---
     
     ## 📞 연락처
-    - 📧 Email: kimkuns98@gmail.com
+    - 📧 Email: whitemousedev@gmail.com
     - 💻 GitHub: https://github.com/kimkuns91
     - 📝 Blog: https://velog.io/@kimkuns
     `,

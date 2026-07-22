@@ -6,7 +6,7 @@ import { IContactInfo } from '@/types/contact';
 
 // 연락처 정보
 export const CONTACT_INFO: IContactInfo = {
-  email: 'kimkuns98@gmail.com',
+  email: 'whitemousedev@gmail.com',
   phone: '(+82) 010 8595 9869',
   location: 'Seoul, Korea',
 };
